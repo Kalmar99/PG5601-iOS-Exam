@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0E97F12546EE1200F64983 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E97F02546EE1200F64983 /* MapsViewController.swift */; };
 		CE1DDE232546C22C009D144A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE222546C22C009D144A /* AppDelegate.swift */; };
 		CE1DDE252546C22C009D144A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE242546C22C009D144A /* SceneDelegate.swift */; };
 		CE1DDE272546C22C009D144A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE262546C22C009D144A /* ViewController.swift */; };
@@ -15,6 +16,7 @@
 		CE1DDE2F2546C22E009D144A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1DDE2D2546C22E009D144A /* LaunchScreen.storyboard */; };
 		CE1DDE3A2546C22E009D144A /* CleverWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE392546C22E009D144A /* CleverWeatherTests.swift */; };
 		CE1DDE452546C22F009D144A /* CleverWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE442546C22F009D144A /* CleverWeatherUITests.swift */; };
+		CE1DDE562546CB4F009D144A /* TeperatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE552546CB4F009D144A /* TeperatureCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE0E97F02546EE1200F64983 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		CE1DDE1F2546C22C009D144A /* CleverWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleverWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1DDE222546C22C009D144A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE1DDE242546C22C009D144A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		CE1DDE402546C22F009D144A /* CleverWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleverWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1DDE442546C22F009D144A /* CleverWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleverWeatherUITests.swift; sourceTree = "<group>"; };
 		CE1DDE462546C22F009D144A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE1DDE552546CB4F009D144A /* TeperatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeperatureCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				CE1DDE2B2546C22E009D144A /* Assets.xcassets */,
 				CE1DDE2D2546C22E009D144A /* LaunchScreen.storyboard */,
 				CE1DDE302546C22E009D144A /* Info.plist */,
+				CE1DDE552546CB4F009D144A /* TeperatureCell.swift */,
+				CE0E97F02546EE1200F64983 /* MapsViewController.swift */,
 			);
 			path = CleverWeather;
 			sourceTree = "<group>";
@@ -258,6 +264,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0E97F12546EE1200F64983 /* MapsViewController.swift in Sources */,
+				CE1DDE562546CB4F009D144A /* TeperatureCell.swift in Sources */,
 				CE1DDE272546C22C009D144A /* ViewController.swift in Sources */,
 				CE1DDE232546C22C009D144A /* AppDelegate.swift in Sources */,
 				CE1DDE252546C22C009D144A /* SceneDelegate.swift in Sources */,
