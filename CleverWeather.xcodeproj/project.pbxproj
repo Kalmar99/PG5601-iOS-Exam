@@ -1,0 +1,592 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE1DDE232546C22C009D144A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE222546C22C009D144A /* AppDelegate.swift */; };
+		CE1DDE252546C22C009D144A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE242546C22C009D144A /* SceneDelegate.swift */; };
+		CE1DDE272546C22C009D144A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE262546C22C009D144A /* ViewController.swift */; };
+		CE1DDE2A2546C22C009D144A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1DDE282546C22C009D144A /* Main.storyboard */; };
+		CE1DDE2C2546C22E009D144A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1DDE2B2546C22E009D144A /* Assets.xcassets */; };
+		CE1DDE2F2546C22E009D144A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1DDE2D2546C22E009D144A /* LaunchScreen.storyboard */; };
+		CE1DDE3A2546C22E009D144A /* CleverWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE392546C22E009D144A /* CleverWeatherTests.swift */; };
+		CE1DDE452546C22F009D144A /* CleverWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE442546C22F009D144A /* CleverWeatherUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE1DDE362546C22E009D144A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE1DDE172546C22C009D144A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1DDE1E2546C22C009D144A;
+			remoteInfo = CleverWeather;
+		};
+		CE1DDE412546C22F009D144A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE1DDE172546C22C009D144A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1DDE1E2546C22C009D144A;
+			remoteInfo = CleverWeather;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CE1DDE1F2546C22C009D144A /* CleverWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleverWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1DDE222546C22C009D144A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CE1DDE242546C22C009D144A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		CE1DDE262546C22C009D144A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE1DDE292546C22C009D144A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CE1DDE2B2546C22E009D144A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE1DDE2E2546C22E009D144A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CE1DDE302546C22E009D144A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE1DDE352546C22E009D144A /* CleverWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleverWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1DDE392546C22E009D144A /* CleverWeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleverWeatherTests.swift; sourceTree = "<group>"; };
+		CE1DDE3B2546C22E009D144A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE1DDE402546C22F009D144A /* CleverWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleverWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1DDE442546C22F009D144A /* CleverWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleverWeatherUITests.swift; sourceTree = "<group>"; };
+		CE1DDE462546C22F009D144A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE1DDE1C2546C22C009D144A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1DDE322546C22E009D144A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1DDE3D2546C22F009D144A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE1DDE162546C22C009D144A = {
+			isa = PBXGroup;
+			children = (
+				CE1DDE212546C22C009D144A /* CleverWeather */,
+				CE1DDE382546C22E009D144A /* CleverWeatherTests */,
+				CE1DDE432546C22F009D144A /* CleverWeatherUITests */,
+				CE1DDE202546C22C009D144A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE1DDE202546C22C009D144A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE1DDE1F2546C22C009D144A /* CleverWeather.app */,
+				CE1DDE352546C22E009D144A /* CleverWeatherTests.xctest */,
+				CE1DDE402546C22F009D144A /* CleverWeatherUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE1DDE212546C22C009D144A /* CleverWeather */ = {
+			isa = PBXGroup;
+			children = (
+				CE1DDE222546C22C009D144A /* AppDelegate.swift */,
+				CE1DDE242546C22C009D144A /* SceneDelegate.swift */,
+				CE1DDE262546C22C009D144A /* ViewController.swift */,
+				CE1DDE282546C22C009D144A /* Main.storyboard */,
+				CE1DDE2B2546C22E009D144A /* Assets.xcassets */,
+				CE1DDE2D2546C22E009D144A /* LaunchScreen.storyboard */,
+				CE1DDE302546C22E009D144A /* Info.plist */,
+			);
+			path = CleverWeather;
+			sourceTree = "<group>";
+		};
+		CE1DDE382546C22E009D144A /* CleverWeatherTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE1DDE392546C22E009D144A /* CleverWeatherTests.swift */,
+				CE1DDE3B2546C22E009D144A /* Info.plist */,
+			);
+			path = CleverWeatherTests;
+			sourceTree = "<group>";
+		};
+		CE1DDE432546C22F009D144A /* CleverWeatherUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CE1DDE442546C22F009D144A /* CleverWeatherUITests.swift */,
+				CE1DDE462546C22F009D144A /* Info.plist */,
+			);
+			path = CleverWeatherUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE1DDE1E2546C22C009D144A /* CleverWeather */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1DDE492546C22F009D144A /* Build configuration list for PBXNativeTarget "CleverWeather" */;
+			buildPhases = (
+				CE1DDE1B2546C22C009D144A /* Sources */,
+				CE1DDE1C2546C22C009D144A /* Frameworks */,
+				CE1DDE1D2546C22C009D144A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CleverWeather;
+			productName = CleverWeather;
+			productReference = CE1DDE1F2546C22C009D144A /* CleverWeather.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CE1DDE342546C22E009D144A /* CleverWeatherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1DDE4C2546C22F009D144A /* Build configuration list for PBXNativeTarget "CleverWeatherTests" */;
+			buildPhases = (
+				CE1DDE312546C22E009D144A /* Sources */,
+				CE1DDE322546C22E009D144A /* Frameworks */,
+				CE1DDE332546C22E009D144A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE1DDE372546C22E009D144A /* PBXTargetDependency */,
+			);
+			name = CleverWeatherTests;
+			productName = CleverWeatherTests;
+			productReference = CE1DDE352546C22E009D144A /* CleverWeatherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CE1DDE3F2546C22F009D144A /* CleverWeatherUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1DDE4F2546C22F009D144A /* Build configuration list for PBXNativeTarget "CleverWeatherUITests" */;
+			buildPhases = (
+				CE1DDE3C2546C22F009D144A /* Sources */,
+				CE1DDE3D2546C22F009D144A /* Frameworks */,
+				CE1DDE3E2546C22F009D144A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE1DDE422546C22F009D144A /* PBXTargetDependency */,
+			);
+			name = CleverWeatherUITests;
+			productName = CleverWeatherUITests;
+			productReference = CE1DDE402546C22F009D144A /* CleverWeatherUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE1DDE172546C22C009D144A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					CE1DDE1E2546C22C009D144A = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					CE1DDE342546C22E009D144A = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = CE1DDE1E2546C22C009D144A;
+					};
+					CE1DDE3F2546C22F009D144A = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = CE1DDE1E2546C22C009D144A;
+					};
+				};
+			};
+			buildConfigurationList = CE1DDE1A2546C22C009D144A /* Build configuration list for PBXProject "CleverWeather" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CE1DDE162546C22C009D144A;
+			productRefGroup = CE1DDE202546C22C009D144A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE1DDE1E2546C22C009D144A /* CleverWeather */,
+				CE1DDE342546C22E009D144A /* CleverWeatherTests */,
+				CE1DDE3F2546C22F009D144A /* CleverWeatherUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE1DDE1D2546C22C009D144A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1DDE2F2546C22E009D144A /* LaunchScreen.storyboard in Resources */,
+				CE1DDE2C2546C22E009D144A /* Assets.xcassets in Resources */,
+				CE1DDE2A2546C22C009D144A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1DDE332546C22E009D144A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1DDE3E2546C22F009D144A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE1DDE1B2546C22C009D144A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1DDE272546C22C009D144A /* ViewController.swift in Sources */,
+				CE1DDE232546C22C009D144A /* AppDelegate.swift in Sources */,
+				CE1DDE252546C22C009D144A /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1DDE312546C22E009D144A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1DDE3A2546C22E009D144A /* CleverWeatherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1DDE3C2546C22F009D144A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1DDE452546C22F009D144A /* CleverWeatherUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE1DDE372546C22E009D144A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1DDE1E2546C22C009D144A /* CleverWeather */;
+			targetProxy = CE1DDE362546C22E009D144A /* PBXContainerItemProxy */;
+		};
+		CE1DDE422546C22F009D144A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1DDE1E2546C22C009D144A /* CleverWeather */;
+			targetProxy = CE1DDE412546C22F009D144A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CE1DDE282546C22C009D144A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE1DDE292546C22C009D144A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CE1DDE2D2546C22E009D144A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE1DDE2E2546C22E009D144A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CE1DDE472546C22F009D144A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CE1DDE482546C22F009D144A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE1DDE4A2546C22F009D144A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CleverWeather/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = example.CleverWeather;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE1DDE4B2546C22F009D144A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CleverWeather/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = example.CleverWeather;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CE1DDE4D2546C22F009D144A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CleverWeatherTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = example.CleverWeatherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleverWeather.app/CleverWeather";
+			};
+			name = Debug;
+		};
+		CE1DDE4E2546C22F009D144A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CleverWeatherTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = example.CleverWeatherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleverWeather.app/CleverWeather";
+			};
+			name = Release;
+		};
+		CE1DDE502546C22F009D144A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CleverWeatherUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = example.CleverWeatherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CleverWeather;
+			};
+			name = Debug;
+		};
+		CE1DDE512546C22F009D144A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CleverWeatherUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = example.CleverWeatherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CleverWeather;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE1DDE1A2546C22C009D144A /* Build configuration list for PBXProject "CleverWeather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE1DDE472546C22F009D144A /* Debug */,
+				CE1DDE482546C22F009D144A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE1DDE492546C22F009D144A /* Build configuration list for PBXNativeTarget "CleverWeather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE1DDE4A2546C22F009D144A /* Debug */,
+				CE1DDE4B2546C22F009D144A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE1DDE4C2546C22F009D144A /* Build configuration list for PBXNativeTarget "CleverWeatherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE1DDE4D2546C22F009D144A /* Debug */,
+				CE1DDE4E2546C22F009D144A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE1DDE4F2546C22F009D144A /* Build configuration list for PBXNativeTarget "CleverWeatherUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE1DDE502546C22F009D144A /* Debug */,
+				CE1DDE512546C22F009D144A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CE1DDE172546C22C009D144A /* Project object */;
+}
