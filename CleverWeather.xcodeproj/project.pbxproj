@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CE0E97F12546EE1200F64983 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E97F02546EE1200F64983 /* MapsViewController.swift */; };
+		CE0E97F62546FE9700F64983 /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E97F52546FE9700F64983 /* FetchData.swift */; };
+		CE0E97FB254705B500F64983 /* ParseWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E97FA254705B500F64983 /* ParseWeatherResponse.swift */; };
 		CE1DDE232546C22C009D144A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE222546C22C009D144A /* AppDelegate.swift */; };
 		CE1DDE252546C22C009D144A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE242546C22C009D144A /* SceneDelegate.swift */; };
 		CE1DDE272546C22C009D144A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE262546C22C009D144A /* ViewController.swift */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		CE0E97F02546EE1200F64983 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
+		CE0E97F52546FE9700F64983 /* FetchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchData.swift; sourceTree = "<group>"; };
+		CE0E97FA254705B500F64983 /* ParseWeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseWeatherResponse.swift; sourceTree = "<group>"; };
 		CE1DDE1F2546C22C009D144A /* CleverWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleverWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1DDE222546C22C009D144A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE1DDE242546C22C009D144A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 				CE1DDE302546C22E009D144A /* Info.plist */,
 				CE1DDE552546CB4F009D144A /* TeperatureCell.swift */,
 				CE0E97F02546EE1200F64983 /* MapsViewController.swift */,
+				CE0E97F52546FE9700F64983 /* FetchData.swift */,
+				CE0E97FA254705B500F64983 /* ParseWeatherResponse.swift */,
 			);
 			path = CleverWeather;
 			sourceTree = "<group>";
@@ -266,8 +272,10 @@
 			files = (
 				CE0E97F12546EE1200F64983 /* MapsViewController.swift in Sources */,
 				CE1DDE562546CB4F009D144A /* TeperatureCell.swift in Sources */,
+				CE0E97FB254705B500F64983 /* ParseWeatherResponse.swift in Sources */,
 				CE1DDE272546C22C009D144A /* ViewController.swift in Sources */,
 				CE1DDE232546C22C009D144A /* AppDelegate.swift in Sources */,
+				CE0E97F62546FE9700F64983 /* FetchData.swift in Sources */,
 				CE1DDE252546C22C009D144A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

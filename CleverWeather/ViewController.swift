@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  CleverWeather
 //
-//  Created by Jonas on 10/26/20.
+//  Created by REDACTED on 10/26/20.
 //
 
 import UIKit
@@ -31,6 +31,30 @@ class ViewController: UIViewController, UITableViewDataSource {
         self.navigationItem.title = "Weather Forecast"
         forecastTable.dataSource = self;
         forecastTable.reloadData();
+        
+        
+        //Insert db check logic before this
+        DispatchQueue.init(label: "Get Api Data").async {
+            // instantiate a fetcher object to handle the request
+            let fetcher = FetchData()
+            let url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=59.91&lon=10.74"
+            //Get the data
+            fetcher.get(url: url,complete: { (result) in
+                //Check if it was successfull, if not print error
+                switch result {
+                    case .success(let data) : print(data) //Parse JSON here
+                    case .failure(let error) : print(error)
+                }
+                
+                // Task finished, return to main thread with result
+                DispatchQueue.main.async {
+                    // Update table here
+                }
+                
+            })
+        }
+        
+        
         
     }
     

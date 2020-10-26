@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  CleverWeather
 //
-//  Created by Jonas on 10/26/20.
+//  Created by REDACTED on 10/26/20.
 //
 
 import UIKit
