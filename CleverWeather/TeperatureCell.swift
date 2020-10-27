@@ -12,6 +12,7 @@ class TeperatureCell: UITableViewCell {
     @IBOutlet weak var timeLabel : UILabel!;
     @IBOutlet weak var statusLabel : UILabel!;
     @IBOutlet weak var measureLabel : UILabel!;
+    @IBOutlet weak var measureTextLabel : UILabel!;
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -19,6 +19,7 @@
 		CE1DDE3A2546C22E009D144A /* CleverWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE392546C22E009D144A /* CleverWeatherTests.swift */; };
 		CE1DDE452546C22F009D144A /* CleverWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE442546C22F009D144A /* CleverWeatherUITests.swift */; };
 		CE1DDE562546CB4F009D144A /* TeperatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE552546CB4F009D144A /* TeperatureCell.swift */; };
+		CEA35D3625481EF2009D22F6 /* WeatherResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA35D3525481EF2009D22F6 /* WeatherResponseModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		CE1DDE442546C22F009D144A /* CleverWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleverWeatherUITests.swift; sourceTree = "<group>"; };
 		CE1DDE462546C22F009D144A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1DDE552546CB4F009D144A /* TeperatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeperatureCell.swift; sourceTree = "<group>"; };
+		CEA35D3525481EF2009D22F6 /* WeatherResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponseModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		CE1DDE212546C22C009D144A /* CleverWeather */ = {
 			isa = PBXGroup;
 			children = (
+				CEA35D2C25481C9C009D22F6 /* Models */,
 				CE1DDE222546C22C009D144A /* AppDelegate.swift */,
 				CE1DDE242546C22C009D144A /* SceneDelegate.swift */,
 				CE1DDE262546C22C009D144A /* ViewController.swift */,
@@ -138,6 +141,14 @@
 				CE1DDE462546C22F009D144A /* Info.plist */,
 			);
 			path = CleverWeatherUITests;
+			sourceTree = "<group>";
+		};
+		CEA35D2C25481C9C009D22F6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CEA35D3525481EF2009D22F6 /* WeatherResponseModels.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE0E97F12546EE1200F64983 /* MapsViewController.swift in Sources */,
+				CEA35D3625481EF2009D22F6 /* WeatherResponseModels.swift in Sources */,
 				CE1DDE562546CB4F009D144A /* TeperatureCell.swift in Sources */,
 				CE0E97FB254705B500F64983 /* ParseWeatherResponse.swift in Sources */,
 				CE1DDE272546C22C009D144A /* ViewController.swift in Sources */,

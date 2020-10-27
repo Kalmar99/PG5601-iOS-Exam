@@ -12,7 +12,6 @@ class MapsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Map"
-
         
     }
     

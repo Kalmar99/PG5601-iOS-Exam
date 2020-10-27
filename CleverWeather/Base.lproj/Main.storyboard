@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TSb-Ip-KoX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -73,6 +73,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="measureLabel" destination="ZYQ-uF-JtK" id="suN-Gh-zJa"/>
+                                            <outlet property="measureTextLabel" destination="FAY-Og-Z8S" id="oZN-6I-3oY"/>
                                             <outlet property="statusLabel" destination="nY6-kc-sGO" id="XmP-KE-6qB"/>
                                             <outlet property="timeLabel" destination="4iW-Re-OPk" id="xsB-HE-jAA"/>
                                         </connections>
@@ -137,7 +138,6 @@
         <!--Item-->
         <scene sceneID="d66-Ow-uXD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sV8-Kk-vao" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ulY-kt-hBr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="fjL-dh-VNk"/>
                     <toolbarItems/>
@@ -150,6 +150,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="h4D-Ha-Ele"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sV8-Kk-vao" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1726" y="76"/>
         </scene>
@@ -161,6 +162,7 @@
                     <navigationItem key="navigationItem" id="4BN-gN-OXx"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rge-bL-Wje">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
