@@ -11,7 +11,18 @@ enum FetchResponse {
     case success(String),failure(Error)
 }
 
+enum FetchWeatherByCordsResponse {
+    case success([NextHours]), failure(Error)
+}
+
 class FetchData {
+
+    var endpoint: String
+
+    init(endpoint: String) {
+        self.endpoint = endpoint
+    }
+
     
     func get(url: String, complete: @escaping (FetchResponse) -> Void ) {
         
@@ -22,6 +33,33 @@ class FetchData {
                 complete(.failure(error!))
             } else if(data != nil) {
                 complete(.success(String(data: data!, encoding: .utf8)!))
+            } else {
+                complete(.failure(NSError(domain: "example.cleverweather", code: 500, userInfo: [NSLocalizedDescriptionKey : "Cant convert data to string"])))
+            }
+        })
+        task.resume()
+        
+    }
+    
+    // Gets the weather data and parsing it
+    func getWeatherByCords(lat: Double, lon: Double, complete: @escaping (FetchWeatherByCordsResponse) -> Void ) {
+        let session = URLSession.shared
+        let coords = (lat: String(format: "%.1f",lat), lon: String(format: "%.1f", lon))
+        let urlString = "\(endpoint)?lat=\(coords.lat)&lon=\(coords.lon)"
+        
+        let url = URL(string: urlString)!
+        
+        let task = session.dataTask(with: url, completionHandler: { (data, response, error) in
+            if(error != nil) {
+                complete(.failure(error!))
+            } else if(data != nil) {
+                //Parse the data
+                let parser = WeatherParser();
+                let json = String(data: data!, encoding: .utf8)!
+                let weather = parser.parseWeather(data: json)
+                //Format it so we get the todays data
+                let formattedWeather = parser.format(weatherData: weather)
+                complete(.success(formattedWeather))
             } else {
                 complete(.failure(NSError(domain: "example.cleverweather", code: 500, userInfo: [NSLocalizedDescriptionKey : "Cant convert data to string"])))
             }
