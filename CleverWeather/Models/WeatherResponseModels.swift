@@ -7,6 +7,9 @@
 
 import Foundation
 
+protocol WeatherData {
+    
+}
 
 struct WeatherResponse : Decodable {
     let type: String
@@ -56,7 +59,7 @@ struct TimeseriesData : Decodable {
     }
 }
 
-struct NextHours : Decodable {
+struct NextHours : Decodable, WeatherData {
     var type: Int?
     let summary: Summary
     let details: Details?
@@ -74,7 +77,7 @@ struct Instant : Decodable {
     let details: InstantDetails
 }
 
-struct InstantDetails : Decodable {
+struct InstantDetails : Decodable, WeatherData {
     let air_pressure_at_sea_level: Double
     let air_temperature: Double
     let cloud_area_fraction: Double

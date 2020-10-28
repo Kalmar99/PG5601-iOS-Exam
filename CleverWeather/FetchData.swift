@@ -12,7 +12,7 @@ enum FetchResponse {
 }
 
 enum FetchWeatherByCordsResponse {
-    case success([NextHours]), failure(Error)
+    case success((hours: [NextHours],instant: InstantDetails, units: Units)), failure(Error)
 }
 
 class FetchData {
@@ -53,13 +53,17 @@ class FetchData {
             if(error != nil) {
                 complete(.failure(error!))
             } else if(data != nil) {
+                
                 //Parse the data
                 let parser = WeatherParser();
                 let json = String(data: data!, encoding: .utf8)!
                 let weather = parser.parseWeather(data: json)
+                
                 //Format it so we get the todays data
                 let formattedWeather = parser.format(weatherData: weather)
-                complete(.success(formattedWeather))
+                // Create a tupple containing all the information we need in ViewController
+                let todaysData = (hours: formattedWeather.hours, instant: formattedWeather.instant, units: weather.properties.meta.units)
+                complete(.success(todaysData))
             } else {
                 complete(.failure(NSError(domain: "example.cleverweather", code: 500, userInfo: [NSLocalizedDescriptionKey : "Cant convert data to string"])))
             }

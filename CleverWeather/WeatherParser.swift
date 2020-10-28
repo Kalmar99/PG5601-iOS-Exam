@@ -32,7 +32,9 @@ class WeatherParser {
         
     }
     
-    func format(weatherData: WeatherResponse) -> [NextHours] {
+    
+    
+    func format(weatherData: WeatherResponse) -> (hours: [NextHours],instant: InstantDetails) {
         
         let time = Date()
         let currentTime = (
@@ -51,7 +53,8 @@ class WeatherParser {
         let noData = Summary(symbol_code: "No Data")
         
         if (filteredWeather.data.next1hours != nil) {
-            currentWeather.append(filteredWeather.data.next1hours!)
+          
+          currentWeather.append(filteredWeather.data.next1hours!)
         } else {
             currentWeather.append(NextHours(summary: noData, details: nil))
         }
@@ -69,7 +72,7 @@ class WeatherParser {
             currentWeather.append(NextHours(summary: noData, details: nil))
         }
         
-        return currentWeather
+        return (hours: currentWeather, instant: filteredWeather.data.instant.details)
     }
     
     
