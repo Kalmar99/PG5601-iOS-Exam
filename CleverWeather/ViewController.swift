@@ -17,9 +17,10 @@ struct weatherData {
     var measure: String?
 }
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, locationUpdateDelegate, UITabBarControllerDelegate {
     
     @IBOutlet weak var forecastTable : UITableView!;
+    @IBOutlet weak var latLonLabel : UILabel!;
    
     var weather : [[WeatherData]] = [
         [],
@@ -32,28 +33,12 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        self.tabBarController?.delegate = self;
         self.navigationItem.title = "Weather Forecast"
         forecastTable.dataSource = self;
         forecastTable.reloadData();
-        
         // Get the api data
-        DispatchQueue.init(label: "Get Api Data").async {
-            //get a fetcher object to handle the request & parsing
-            let fetcher = FetchData(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
-            fetcher.getWeatherByCords(lat: 59.91, lon: 10.74) { (result) in
-            switch(result) {
-                case .success(let weatherData):
-                    DispatchQueue.main.async {
-                        self.weather[0].append(weatherData.instant)
-                        self.weather[1].append(contentsOf: weatherData.hours)
-                        self.units = weatherData.units
-                        self.forecastTable.reloadData()
-                    }
-                case .failure(let error):
-                    print(error)
-            }}
-        }
+        getWeatherData(lat: 59.91, lon: 10.74)
            
     }
     
@@ -88,6 +73,46 @@ class ViewController: UIViewController, UITableViewDataSource {
         }
 
         return cell;
+    }
+    
+    func getWeatherData(lat: Double, lon: Double) {
+        DispatchQueue.init(label: "Get Api Data").async {
+            //get a fetcher object to handle the request & parsing
+            let fetcher = FetchData(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
+            fetcher.getWeatherByCords(lat: lat, lon: lon) { (result) in
+            switch(result) {
+                case .success(let weatherData):
+                    DispatchQueue.main.async {
+                        self.weather[0].append(weatherData.instant)
+                        self.weather[1].append(contentsOf: weatherData.hours)
+                        self.units = weatherData.units
+                        self.forecastTable.reloadData()
+                        self.latLonLabel.text = "Location: \(String(format: "%.2f",lat)), \(String(format: "%.2f",lon))"
+                    }
+                case .failure(let error):
+                    print(error)
+            }}
+        }
+    }
+    
+    func locationUpdated(lat: Double, lon: Double) {
+        print(lat,lon)
+        //Clear old data
+        weather = [
+            [],
+            []
+        ]
+        getWeatherData(lat: lat, lon: lon)
+        
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        if(viewController is MapsViewController) {
+            let view = viewController as! MapsViewController
+            view.locationUpdateDelegate = self;
+        }
+        
     }
     
 }

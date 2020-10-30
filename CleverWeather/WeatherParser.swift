@@ -26,13 +26,12 @@ class WeatherParser {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        print(json)
         let weatherResponse : WeatherResponse = try! decoder.decode(WeatherResponse.self, from: json!)
         //let weatherResponse: WeatherResponse = try! JSONDecoder().decode(WeatherResponse.self,from: json!)
         return weatherResponse
         
     }
-    
-    
     
     func format(weatherData: WeatherResponse) -> (hours: [NextHours],instant: InstantDetails) {
         
@@ -53,7 +52,6 @@ class WeatherParser {
         let noData = Summary(symbol_code: "No Data")
         
         if (filteredWeather.data.next1hours != nil) {
-          
           currentWeather.append(filteredWeather.data.next1hours!)
         } else {
             currentWeather.append(NextHours(summary: noData, details: nil))
@@ -66,7 +64,6 @@ class WeatherParser {
         }
         
         if(filteredWeather.data.next12hours != nil) {
-            
             currentWeather.append(filteredWeather.data.next12hours!)
         } else {
             currentWeather.append(NextHours(summary: noData, details: nil))
@@ -74,7 +71,5 @@ class WeatherParser {
         
         return (hours: currentWeather, instant: filteredWeather.data.instant.details)
     }
-    
-    
     
 }

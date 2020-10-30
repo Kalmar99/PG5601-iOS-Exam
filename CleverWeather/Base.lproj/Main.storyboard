@@ -12,13 +12,13 @@
         <!--Forecast-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CleverWeather" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <viewController restorationIdentifier="Forecast" id="BYZ-38-t0r" customClass="ViewController" customModule="CleverWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="Forecast" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8kN-0Z-qYK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="forecastCell" rowHeight="91" id="W9q-fZ-ygI" customClass="TeperatureCell" customModule="CleverWeather" customModuleProvider="target">
@@ -80,18 +80,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSB-kC-8cR">
+                                <rect key="frame" x="8" y="695" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1LH-5P-qi0"/>
-                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="40M-VF-79l"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8kN-0Z-qYK" secondAttribute="bottom" id="76n-YA-E5Q"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8kN-0Z-qYK" secondAttribute="trailing" id="QJ2-bu-NsP"/>
-                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dW2-6M-UJH"/>
-                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iui-pC-7wu"/>
-                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="jtA-S8-4oi"/>
-                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="uOt-UM-X97"/>
+                            <constraint firstItem="GSB-kC-8cR" firstAttribute="top" secondItem="8kN-0Z-qYK" secondAttribute="bottom" constant="8" id="04K-U5-YGw"/>
+                            <constraint firstItem="GSB-kC-8cR" firstAttribute="top" secondItem="8kN-0Z-qYK" secondAttribute="bottom" constant="8" symbolic="YES" id="56N-r3-x3b"/>
+                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6Ov-oo-LAL"/>
+                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Aeq-Lw-052"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GSB-kC-8cR" secondAttribute="bottom" constant="9" id="DOL-Y1-yQd"/>
+                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Jvc-qR-maW"/>
+                            <constraint firstItem="GSB-kC-8cR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="PrG-u5-Dks"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Forecast" image="sun.max" catalog="system" id="ass-Ij-Vm0">
@@ -101,63 +106,58 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="forecastTable" destination="8kN-0Z-qYK" id="YZN-bB-oZu"/>
+                        <outlet property="latLonLabel" destination="GSB-kC-8cR" id="swX-5b-vB0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2554" y="76"/>
+            <point key="canvasLocation" x="2553.6231884057975" y="75.669642857142847"/>
         </scene>
         <!--Map-->
         <scene sceneID="axp-xi-pau">
             <objects>
                 <viewController id="zRy-vW-FLr" customClass="MapsViewController" customModule="CleverWeather" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="f96-jc-aVd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="Maps" id="f96-jc-aVd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GNx-My-Bgx">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GNx-My-Bgx">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                             </mapView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Mav-x7-i6Q">
+                                <rect key="frame" x="345" y="15" width="51" height="31"/>
+                                <connections>
+                                    <action selector="didTouchUpInsideSender:" destination="zRy-vW-FLr" eventType="touchUpInside" id="nVz-YK-5Wr"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dEc-5k-VDB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Mav-x7-i6Q" firstAttribute="leading" secondItem="dEc-5k-VDB" secondAttribute="leading" constant="345" id="8Gg-dC-lJO"/>
                             <constraint firstItem="dEc-5k-VDB" firstAttribute="bottom" secondItem="GNx-My-Bgx" secondAttribute="bottom" id="Fge-UN-zJQ"/>
                             <constraint firstItem="GNx-My-Bgx" firstAttribute="top" secondItem="dEc-5k-VDB" secondAttribute="top" id="P2C-6f-oX1"/>
                             <constraint firstItem="GNx-My-Bgx" firstAttribute="leading" secondItem="dEc-5k-VDB" secondAttribute="leading" id="R8Z-jJ-BHF"/>
+                            <constraint firstItem="dEc-5k-VDB" firstAttribute="trailing" secondItem="Mav-x7-i6Q" secondAttribute="trailing" constant="20" id="SpB-7j-Xot"/>
                             <constraint firstItem="dEc-5k-VDB" firstAttribute="trailing" secondItem="GNx-My-Bgx" secondAttribute="trailing" id="Y2b-Zk-f70"/>
+                            <constraint firstItem="Mav-x7-i6Q" firstAttribute="top" secondItem="dEc-5k-VDB" secondAttribute="top" constant="15" id="p1w-fv-DaS"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="u11-4N-3x7"/>
                     <navigationItem key="navigationItem" title="Map" id="Lhv-iW-KGZ"/>
+                    <connections>
+                        <outlet property="mapView" destination="GNx-My-Bgx" id="Edy-Cg-1pk"/>
+                        <outlet property="switchButton" destination="Mav-x7-i6Q" id="p5w-na-h1I"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E4n-xf-HdJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2554" y="763"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="d66-Ow-uXD">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ulY-kt-hBr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="fjL-dh-VNk"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pMy-Hx-cf4">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="h4D-Ha-Ele"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sV8-Kk-vao" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1726" y="76"/>
-        </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="2F9-t2-uhe">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="TSb-Ip-KoX" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="TSb-Ip-KoX" customClass="TabBarViewController" customModule="CleverWeather" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="4BN-gN-OXx"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -167,36 +167,16 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ulY-kt-hBr" kind="relationship" relationship="viewControllers" id="DgY-1G-Jpb"/>
-                        <segue destination="ncx-IF-zhr" kind="relationship" relationship="viewControllers" id="1Yn-Hh-jmU"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="joq-4N-zkO"/>
+                        <segue destination="zRy-vW-FLr" kind="relationship" relationship="viewControllers" id="KjY-Cw-KAf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iBd-a1-XMr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="964" y="76"/>
         </scene>
-        <!--Map-->
-        <scene sceneID="Nug-la-pA3">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ncx-IF-zhr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" selectedImage="map" id="H2g-vX-QuN"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xsf-Zm-VVz">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="zRy-vW-FLr" kind="relationship" relationship="rootViewController" id="bw3-Lb-tM6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="N3y-Ed-odk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1725" y="763"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="map" catalog="system" width="128" height="110"/>
         <image name="sun.max" catalog="system" width="128" height="124"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
