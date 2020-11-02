@@ -52,7 +52,7 @@ class FetchData {
                     let parser = WeatherParser()
                     let weather : CurrentWeather = {
                         let unformatted = parser.parseWeather(data: data)
-                        let formatted = parser.format(weatherData: unformatted)
+                        let formatted = parser.format(unformatted)
                         return (hours: formatted.hours, instant: formatted.instant, units: unformatted.properties.meta.units)
                     }()
                     complete(.success(weather))
@@ -75,9 +75,7 @@ class FetchData {
                         print(error)
                     }
                 case .failure(let error):
-                    print(error)
-                default:
-                    print("Did not recieve response from weathericon api")
+                    print("getWeatherDescription: ",error)
             }
         })
         

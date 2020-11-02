@@ -49,7 +49,7 @@ struct Timeseries : Decodable {
 
 struct TimeseriesData : Decodable {
     let instant: Instant
-    let next12hours, next1hours,next6hours : NextHours?
+    var next12hours, next1hours,next6hours : NextHours?
     
     enum CodingKeys: String, CodingKey {
         case next12hours = "next_12_hours"
