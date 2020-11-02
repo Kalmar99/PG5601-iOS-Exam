@@ -72,4 +72,26 @@ class FetchData {
         
     }
     
+    func getWeatherDescription() {
+        
+        get(url: "https://api.met.no/weatherapi/weathericon/2.0/legends",complete: {(result) in
+            switch result {
+                case .success(let data):
+                    let decoder = JSONDecoder();
+                    do {
+                        let json = data.data(using: .utf8)
+                        let obj = try JSONSerialization.jsonObject(with: json!, options: .mutableContainers) as! [String: AnyObject]
+                        print(obj["lightsleet"]!["desc_en"])
+                    } catch (let error) {
+                        print(error)
+                    }
+                case .failure(let error):
+                    print(error)
+                default:
+                    print("Did not recieve response from weathericon api")
+            }
+        })
+        
+    }
+    
 }

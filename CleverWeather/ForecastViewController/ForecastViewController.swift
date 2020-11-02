@@ -78,6 +78,7 @@ class ForecastViewController: UIViewController, UITableViewDataSource, locationU
         DispatchQueue.init(label: "Get Api Data").async {
             //get a fetcher object to handle the request & parsing
             let fetcher = FetchData(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
+            fetcher.getWeatherDescription()
             fetcher.getWeatherByCords(lat: lat, lon: lon) { (result) in
             switch(result) {
                 case .success(let weatherData):
