@@ -19,7 +19,6 @@
 		CE1DDE3A2546C22E009D144A /* CleverWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE392546C22E009D144A /* CleverWeatherTests.swift */; };
 		CE1DDE452546C22F009D144A /* CleverWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE442546C22F009D144A /* CleverWeatherUITests.swift */; };
 		CE1DDE562546CB4F009D144A /* TeperatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DDE552546CB4F009D144A /* TeperatureCell.swift */; };
-		CE96CF36254C20C500C7DBDB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96CF35254C20C500C7DBDB /* TabBarViewController.swift */; };
 		CE96CF3C2550048400C7DBDB /* WeatherDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96CF3B2550048400C7DBDB /* WeatherDetails.swift */; };
 		CE96CF44255004A400C7DBDB /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE96CF43255004A400C7DBDB /* WeatherDetails.xib */; };
 		CE96CF5025501D6600C7DBDB /* MapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE96CF4F25501D6600C7DBDB /* MapPoint.swift */; };
@@ -63,7 +62,6 @@
 		CE1DDE462546C22F009D144A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1DDE552546CB4F009D144A /* TeperatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeperatureCell.swift; sourceTree = "<group>"; };
 		CE96CF31254C09E900C7DBDB /* fakeLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = fakeLocation.gpx; sourceTree = "<group>"; };
-		CE96CF35254C20C500C7DBDB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		CE96CF3B2550048400C7DBDB /* WeatherDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetails.swift; sourceTree = "<group>"; };
 		CE96CF43255004A400C7DBDB /* WeatherDetails.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherDetails.xib; sourceTree = "<group>"; };
 		CE96CF4F25501D6600C7DBDB /* MapPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPoint.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 				CE1DDE2D2546C22E009D144A /* LaunchScreen.storyboard */,
 				CE1DDE302546C22E009D144A /* Info.plist */,
 				CE96CF31254C09E900C7DBDB /* fakeLocation.gpx */,
-				CE96CF35254C20C500C7DBDB /* TabBarViewController.swift */,
 			);
 			path = CleverWeather;
 			sourceTree = "<group>";
@@ -333,7 +330,6 @@
 				CE1DDE562546CB4F009D144A /* TeperatureCell.swift in Sources */,
 				CE96CF3C2550048400C7DBDB /* WeatherDetails.swift in Sources */,
 				CE0E97FB254705B500F64983 /* WeatherParser.swift in Sources */,
-				CE96CF36254C20C500C7DBDB /* TabBarViewController.swift in Sources */,
 				CE1DDE272546C22C009D144A /* ForecastViewController.swift in Sources */,
 				CE1DDE232546C22C009D144A /* AppDelegate.swift in Sources */,
 				CE0E97F62546FE9700F64983 /* FetchData.swift in Sources */,

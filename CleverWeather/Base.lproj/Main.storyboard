@@ -123,6 +123,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GNx-My-Bgx">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="625"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gMe-Dn-lBT" appends="YES" id="eYG-GO-hRQ"/>
+                                </connections>
                             </mapView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Mav-x7-i6Q">
                                 <rect key="frame" x="345" y="15" width="51" height="31"/>
@@ -162,6 +166,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E4n-xf-HdJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="gMe-Dn-lBT">
+                    <connections>
+                        <action selector="longPressAddAnnotationWithSender:" destination="zRy-vW-FLr" id="6F0-TQ-QLa"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2553.6231884057975" y="762.72321428571422"/>
         </scene>

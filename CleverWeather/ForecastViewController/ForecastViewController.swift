@@ -55,23 +55,22 @@ class ForecastViewController: UIViewController, UITableViewDataSource, locationU
         
         let time = ["Next Hour","Next 6 Hours","Next 12 Hours"]
         
-        switch(weather[indexPath.section][indexPath.row]) {
-            case is InstantDetails:
-                let details = weather[indexPath.section][indexPath.row] as! InstantDetails
-                cell.timeLabel.text = "Now"
-                cell.statusLabel.text = "\(String(format: "%.1f", details.air_temperature)) \(units!.air_temperature)"
-            case is NextHours:
-                cell.timeLabel.text = time[indexPath.row];
-                cell.measureTextLabel.text = "Weather";
-                let hour = weather[indexPath.section][indexPath.row] as! NextHours
-                if(hour.details != nil) {
-                    cell.measureLabel.text = "\(String(hour.details!.precipitation_amount)) \(units!.precipitation_amount)"
-                }
-                cell.statusLabel.text = hour.summary.symbol_code
-            default:
-                print("No Data")
+        let weatherData = weather[indexPath.section][indexPath.row]
+        
+        if(weatherData is InstantDetails) {
+            let details = weather[indexPath.section][indexPath.row] as! InstantDetails
+            cell.timeLabel.text = "Now"
+            cell.statusLabel.text = "\(String(format: "%.1f", details.air_temperature)) \(units!.air_temperature)"
+        } else if (weatherData is NextHours) {
+            cell.timeLabel.text = time[indexPath.row];
+            cell.measureTextLabel.text = "Weather";
+            let hour = weather[indexPath.section][indexPath.row] as! NextHours
+            if(hour.details != nil) {
+                cell.measureLabel.text = "\(String(hour.details!.precipitation_amount)) \(units!.precipitation_amount)"
+            }
+            cell.statusLabel.text = hour.summary.symbol_code
         }
-
+        
         return cell;
     }
     
