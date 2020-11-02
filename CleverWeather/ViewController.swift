@@ -29,7 +29,6 @@ class ViewController: UIViewController, UITableViewDataSource, locationUpdateDel
     
     var units : Units?
    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -39,6 +38,7 @@ class ViewController: UIViewController, UITableViewDataSource, locationUpdateDel
         forecastTable.reloadData();
         // Get the api data
         getWeatherData(lat: 59.91, lon: 10.74)
+        latLonLabel.text = "Høyskolen Kristiania"
            
     }
     
@@ -87,7 +87,11 @@ class ViewController: UIViewController, UITableViewDataSource, locationUpdateDel
                         self.weather[1].append(contentsOf: weatherData.hours)
                         self.units = weatherData.units
                         self.forecastTable.reloadData()
-                        self.latLonLabel.text = "Location: \(String(format: "%.2f",lat)), \(String(format: "%.2f",lon))"
+                        if(lat == 59.91 && lon == 10.74) {
+                            self.latLonLabel.text = "Location: Høyskolen Kristiania"
+                        } else {
+                            self.latLonLabel.text = "Location: \(String(format: "%.2f",lat)), \(String(format: "%.2f",lon))"
+                        }
                     }
                 case .failure(let error):
                     print(error)

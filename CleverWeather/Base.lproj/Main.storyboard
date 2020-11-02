@@ -122,7 +122,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GNx-My-Bgx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="625"/>
                             </mapView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Mav-x7-i6Q">
                                 <rect key="frame" x="345" y="15" width="51" height="31"/>
@@ -130,29 +130,40 @@
                                     <action selector="didTouchUpInsideSender:" destination="zRy-vW-FLr" eventType="touchUpInside" id="nVz-YK-5Wr"/>
                                 </connections>
                             </switch>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHL-lU-mbp" customClass="WeatherDetails" customModule="CleverWeather" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="626" width="414" height="99"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="99" id="pEV-fM-RmB"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dEc-5k-VDB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="MHL-lU-mbp" firstAttribute="trailing" secondItem="dEc-5k-VDB" secondAttribute="trailing" id="2a7-Y5-89c"/>
                             <constraint firstItem="Mav-x7-i6Q" firstAttribute="leading" secondItem="dEc-5k-VDB" secondAttribute="leading" constant="345" id="8Gg-dC-lJO"/>
-                            <constraint firstItem="dEc-5k-VDB" firstAttribute="bottom" secondItem="GNx-My-Bgx" secondAttribute="bottom" id="Fge-UN-zJQ"/>
-                            <constraint firstItem="GNx-My-Bgx" firstAttribute="top" secondItem="dEc-5k-VDB" secondAttribute="top" id="P2C-6f-oX1"/>
-                            <constraint firstItem="GNx-My-Bgx" firstAttribute="leading" secondItem="dEc-5k-VDB" secondAttribute="leading" id="R8Z-jJ-BHF"/>
+                            <constraint firstItem="MHL-lU-mbp" firstAttribute="top" secondItem="GNx-My-Bgx" secondAttribute="bottom" constant="1" id="8Im-RC-ozm"/>
+                            <constraint firstItem="GNx-My-Bgx" firstAttribute="leading" secondItem="dEc-5k-VDB" secondAttribute="leading" id="APo-rz-b4f"/>
+                            <constraint firstItem="MHL-lU-mbp" firstAttribute="bottom" secondItem="dEc-5k-VDB" secondAttribute="bottom" id="MqO-oe-YV3"/>
                             <constraint firstItem="dEc-5k-VDB" firstAttribute="trailing" secondItem="Mav-x7-i6Q" secondAttribute="trailing" constant="20" id="SpB-7j-Xot"/>
-                            <constraint firstItem="dEc-5k-VDB" firstAttribute="trailing" secondItem="GNx-My-Bgx" secondAttribute="trailing" id="Y2b-Zk-f70"/>
+                            <constraint firstItem="MHL-lU-mbp" firstAttribute="leading" secondItem="dEc-5k-VDB" secondAttribute="leading" id="Xla-SU-YCR"/>
                             <constraint firstItem="Mav-x7-i6Q" firstAttribute="top" secondItem="dEc-5k-VDB" secondAttribute="top" constant="15" id="p1w-fv-DaS"/>
+                            <constraint firstItem="GNx-My-Bgx" firstAttribute="trailing" secondItem="dEc-5k-VDB" secondAttribute="trailing" id="tDY-rs-0nx"/>
+                            <constraint firstItem="GNx-My-Bgx" firstAttribute="top" secondItem="dEc-5k-VDB" secondAttribute="top" id="xWE-LT-HDK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="u11-4N-3x7"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="u11-4N-3x7"/>
                     <navigationItem key="navigationItem" title="Map" id="Lhv-iW-KGZ"/>
                     <connections>
                         <outlet property="mapView" destination="GNx-My-Bgx" id="Edy-Cg-1pk"/>
                         <outlet property="switchButton" destination="Mav-x7-i6Q" id="p5w-na-h1I"/>
+                        <outlet property="weatherDetails" destination="MHL-lU-mbp" id="SgE-Xx-5Yf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E4n-xf-HdJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2554" y="763"/>
+            <point key="canvasLocation" x="2553.6231884057975" y="762.72321428571422"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="2F9-t2-uhe">
@@ -177,7 +188,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="map" catalog="system" width="128" height="110"/>
         <image name="sun.max" catalog="system" width="128" height="124"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

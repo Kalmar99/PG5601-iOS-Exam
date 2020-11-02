@@ -30,6 +30,7 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate,UITabBarCo
     
     @IBOutlet weak var mapView : MKMapView!;
     @IBOutlet weak var switchButton : UISwitch!;
+    @IBOutlet weak var weatherDetails: WeatherDetails!;
     
     var lat: Double? = nil
     var lon: Double? = nil
@@ -43,6 +44,8 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate,UITabBarCo
         self.navigationItem.title = "Map"
                 
         //Ask for permission to track user.
+        weatherDetails.latLabel.text = "Hello"
+        weatherDetails.lonLabel.text = "World"
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
