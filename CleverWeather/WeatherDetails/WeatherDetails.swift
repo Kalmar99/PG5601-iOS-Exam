@@ -12,6 +12,7 @@ class WeatherDetails: UIView,WeatherDetailsDelegate {
     @IBOutlet weak var latLabel : UILabel!;
     @IBOutlet weak var lonLabel : UILabel!;
     @IBOutlet weak var contentView: UIView!;
+    @IBOutlet weak var symbolImageView : UIImageView!;
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -26,6 +27,10 @@ class WeatherDetails: UIView,WeatherDetailsDelegate {
     func updateData(lat: Double, lon: Double, data: NextHours) {
         latLabel.text = String(format: "%.2f",lat)
         lonLabel.text = String(format: "%.2f",lon)
+        
+        let image = UIImage(named: data.summary.symbol_code)
+        symbolImageView.image = image;
+        
         print(data)
     }
     
