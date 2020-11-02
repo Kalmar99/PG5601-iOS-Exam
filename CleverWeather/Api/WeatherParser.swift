@@ -12,6 +12,8 @@ struct test : Decodable {
     var type: String
 }
 
+typealias ParsedWeather = (hours: [NextHours], instant: InstantDetails)
+
 class WeatherParser {
     
     func parseWeather(data: String) -> WeatherResponse {
@@ -41,7 +43,7 @@ class WeatherParser {
             hour: Calendar.current.component(.hour , from: time),
             month: Calendar.current.component(.month , from: time))
         
-        var filteredWeather = weatherData.properties.timeseries.filter { item in
+        let filteredWeather = weatherData.properties.timeseries.filter { item in
             return (Calendar.current.component(.month, from: item.time) == currentTime.month
                     && Calendar.current.component(.day, from: item.time) == currentTime.day
                     && Calendar.current.component(.hour, from: item.time) == currentTime.hour)
@@ -69,7 +71,7 @@ class WeatherParser {
             currentWeather.append(NextHours(summary: noData, details: nil))
         }
         
-        return (hours: currentWeather, instant: filteredWeather.data.instant.details)
+        return ParsedWeather(hours: currentWeather, instant: filteredWeather.data.instant.details)
     }
     
 }
