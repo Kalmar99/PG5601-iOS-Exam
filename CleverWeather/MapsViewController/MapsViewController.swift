@@ -9,19 +9,6 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapPoint : NSObject, MKAnnotation {
-    let title: String?
-    let locationName: String?
-    let coordinate: CLLocationCoordinate2D
-    
-    init(title: String, locationName: String, coordinate: CLLocationCoordinate2D) {
-        self.title = title;
-        self.locationName = locationName;
-        self.coordinate = coordinate
-        super.init()
-    }
-}
-
 protocol locationUpdateDelegate {
     func locationUpdated(lat: Double, lon: Double);
 }
@@ -65,8 +52,7 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate,UITabBarCo
                           coordinate: CLLocationCoordinate2D(latitude: 59.91, longitude: 10.74))
         mapView.centerOnCords(location: location)
         mapView.addAnnotation(hk)
-        
-        
+
         
     }
     
@@ -89,7 +75,7 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate,UITabBarCo
     }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if(viewController is ViewController) {
+        if(viewController is ForecastViewController) {
             guard lat != nil && lon != nil else {
                 return;
             }

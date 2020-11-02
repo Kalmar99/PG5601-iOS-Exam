@@ -17,7 +17,7 @@ struct weatherData {
     var measure: String?
 }
 
-class ViewController: UIViewController, UITableViewDataSource, locationUpdateDelegate, UITabBarControllerDelegate {
+class ForecastViewController: UIViewController, UITableViewDataSource, locationUpdateDelegate, UITabBarControllerDelegate {
     
     @IBOutlet weak var forecastTable : UITableView!;
     @IBOutlet weak var latLonLabel : UILabel!;
