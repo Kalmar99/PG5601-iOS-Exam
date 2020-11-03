@@ -7,21 +7,18 @@
 
 import UIKit
 
-struct NowData {
-    
-}
-
 struct weatherData {
     var time: String = ""
     var status: String = ""
     var measure: String?
 }
 
-class ForecastViewController: UIViewController, UITableViewDataSource, locationUpdateDelegate, UITabBarControllerDelegate {
+class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBarControllerDelegate {
     
     @IBOutlet weak var forecastTable : UITableView!;
     @IBOutlet weak var latLonLabel : UILabel!;
-   
+    
+    let forecastDataSource = ForecastDataSource()
     var weather : [[WeatherData]] = [
         [],
         []
@@ -34,58 +31,37 @@ class ForecastViewController: UIViewController, UITableViewDataSource, locationU
         // Do any additional setup after loading the view.
         self.tabBarController?.delegate = self;
         self.navigationItem.title = "Weather Forecast"
-        forecastTable.dataSource = self;
-        forecastTable.reloadData();
+        
+        forecastTable.dataSource = forecastDataSource;
+        
         // Get the api data
         getWeatherData(lat: 59.91, lon: 10.74)
         latLonLabel.text = "Høyskolen Kristiania"
            
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return weather[section].count
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return weather.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "forecastCell", for: indexPath) as! TeperatureCell;
-        
-        let time = ["Next Hour","Next 6 Hours","Next 12 Hours"]
-        
-        let weatherData = weather[indexPath.section][indexPath.row]
-        
-        if(weatherData is InstantDetails) {
-            let details = weather[indexPath.section][indexPath.row] as! InstantDetails
-            cell.timeLabel.text = "Now"
-            cell.statusLabel.text = "\(String(format: "%.1f", details.air_temperature)) \(units!.air_temperature)"
-        } else if (weatherData is NextHours) {
-            cell.timeLabel.text = time[indexPath.row];
-            cell.measureTextLabel.text = "Weather";
-            let hour = weather[indexPath.section][indexPath.row] as! NextHours
-            if(hour.details != nil) {
-                cell.measureLabel.text = "\(String(hour.details!.precipitation_amount)) \(units!.precipitation_amount)"
-            }
-            cell.statusLabel.text = hour.summary.symbol_code
-        }
-        
-        return cell;
-    }
-    
+   
     func getWeatherData(lat: Double, lon: Double) {
         DispatchQueue.init(label: "Get Api Data").async {
             //get a fetcher object to handle the request & parsing
             let fetcher = FetchData(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
-            fetcher.getWeatherDescription()
+            fetcher.getWeatherDescription() {(result) in
+                switch result {
+                    case .success(let descriptions):
+                        DispatchQueue.main.async {
+                            self.forecastDataSource.descriptions = descriptions
+                            self.forecastTable.reloadData()
+                        }
+                    case .failure(let error):
+                        print(error)
+                }
+            }
             fetcher.getWeatherByCords(lat: lat, lon: lon) { (result) in
             switch(result) {
                 case .success(let weatherData):
                     DispatchQueue.main.async {
-                        self.weather[0].append(weatherData.instant)
-                        self.weather[1].append(contentsOf: weatherData.hours)
-                        self.units = weatherData.units
+                        self.forecastDataSource.weather[0].append(weatherData.instant)
+                        self.forecastDataSource.weather[1].append(contentsOf: weatherData.hours)
+                        self.forecastDataSource.units = weatherData.units
                         self.forecastTable.reloadData()
                         if(lat == 59.91 && lon == 10.74) {
                             self.latLonLabel.text = "Location: Høyskolen Kristiania"

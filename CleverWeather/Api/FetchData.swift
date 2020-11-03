@@ -8,14 +8,18 @@
 
 import Foundation
 
-enum FetchResponse {
+enum GetResponse {
     case success(String),failure(Error)
 }
 
 typealias CurrentWeather = (hours: [NextHours],instant: InstantDetails, units: Units)
 
-enum FetchWeatherByCordsResponse {
+enum FetchWeatherResponse {
     case success(CurrentWeather), failure(Error)
+}
+
+enum DescriptionResponse {
+    case success([String : AnyObject]), failure(Error)
 }
 
 class FetchData {
@@ -27,7 +31,7 @@ class FetchData {
     }
 
     
-    private func get(url: String, complete: @escaping (FetchResponse) -> Void ) {
+    private func get(url: String, complete: @escaping (GetResponse) -> Void ) {
         
         let endpoint = URL(string: url)!
         let session = URLSession.shared;
@@ -44,7 +48,7 @@ class FetchData {
         
     }
     
-    func getWeatherByCords(lat: Double, lon: Double, complete: @escaping (FetchWeatherByCordsResponse) -> Void){
+    func getWeatherByCords(lat: Double, lon: Double, complete: @escaping (FetchWeatherResponse) -> Void){
         let coords = (lat: String(format: "%.2f",lat), lon: String(format: "%.2f", lon))
         get(url: "\(endpoint)?lat=\(coords.lat)&lon=\(coords.lon)",complete: {(result) in
             switch result {
@@ -62,15 +66,14 @@ class FetchData {
         })
     }
     
-    func getWeatherDescription() {
-        
+    func getWeatherDescription(complete: @escaping (DescriptionResponse) -> Void) {
         get(url: "https://api.met.no/weatherapi/weathericon/2.0/legends",complete: {(result) in
             switch result {
                 case .success(let data):
                     do {
                         let json = data.data(using: .utf8)
-                        let obj = try JSONSerialization.jsonObject(with: json!, options: .mutableContainers) as! [String: AnyObject]
-                        print(obj["lightsleet"]!["desc_en"])
+                        let descriptions = try JSONSerialization.jsonObject(with: json!, options: .mutableContainers) as! [String: AnyObject]
+                        complete(.success(descriptions))
                     } catch (let error) {
                         print(error)
                     }

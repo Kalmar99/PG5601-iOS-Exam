@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TeperatureCell: UITableViewCell {
+class ForecastCell: UITableViewCell {
     
     @IBOutlet weak var timeLabel : UILabel!;
     @IBOutlet weak var statusLabel : UILabel!;
