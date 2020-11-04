@@ -172,12 +172,43 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2553.6231884057975" y="762.72321428571422"/>
+            <point key="canvasLocation" x="3439" y="76"/>
         </scene>
-        <!--Tab Bar View Controller-->
+        <!--Home-->
+        <scene sceneID="0Q7-o8-UBL">
+            <objects>
+                <viewController id="2RL-vD-0SB" customClass="HomeViewController" customModule="CleverWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GiK-Vv-naG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ek-g5-0tD" customClass="SimpleForecast" customModule="CleverWeather" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Qln-Cr-a4f"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3Ek-g5-0tD" firstAttribute="leading" secondItem="Qln-Cr-a4f" secondAttribute="leading" id="Hqq-xt-UMv"/>
+                            <constraint firstItem="3Ek-g5-0tD" firstAttribute="top" secondItem="Qln-Cr-a4f" secondAttribute="top" id="VVQ-Tx-lqS"/>
+                            <constraint firstItem="Qln-Cr-a4f" firstAttribute="bottom" secondItem="3Ek-g5-0tD" secondAttribute="bottom" id="d0z-Hs-gmc"/>
+                            <constraint firstItem="Qln-Cr-a4f" firstAttribute="trailing" secondItem="3Ek-g5-0tD" secondAttribute="trailing" id="iUc-nn-miG"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="swY-XI-uGe"/>
+                    <connections>
+                        <outlet property="simpleForecast" destination="3Ek-g5-0tD" id="n3L-W6-gsu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="toM-gY-Rq2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4275" y="76"/>
+        </scene>
+        <!--Tab Bar Controller-->
         <scene sceneID="2F9-t2-uhe">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="TSb-Ip-KoX" customClass="TabBarViewController" customModule="CleverWeather" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="TSb-Ip-KoX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="4BN-gN-OXx"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -187,16 +218,18 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="joq-4N-zkO"/>
-                        <segue destination="zRy-vW-FLr" kind="relationship" relationship="viewControllers" id="KjY-Cw-KAf"/>
+                        <segue destination="2RL-vD-0SB" kind="relationship" relationship="viewControllers" id="wrT-0o-LES"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="XlL-e4-jIr"/>
+                        <segue destination="zRy-vW-FLr" kind="relationship" relationship="viewControllers" id="CTy-R6-4cb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iBd-a1-XMr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="964" y="76"/>
+            <point key="canvasLocation" x="2943" y="832"/>
         </scene>
     </scenes>
     <resources>
+        <image name="house" catalog="system" width="128" height="106"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="sun.max" catalog="system" width="128" height="124"/>
         <systemColor name="linkColor">

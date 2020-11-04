@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Forecast" representedClassName="Forecast" syncable="YES">
+        <attribute name="hours" attributeType="Transformable" valueTransformerName="" customClassName="[Hour]"/>
+        <attribute name="instant" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="InstantData"/>
+        <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="ForecastCollection" representedClassName="ForecastCollection" syncable="YES">
+        <attribute name="forecasts" attributeType="Transformable" valueTransformerName="" customClassName="[Forecast]"/>
+        <attribute name="time" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="Hour" representedClassName="Hour" syncable="YES">
+        <attribute name="precipitationAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="symbolCode" attributeType="String"/>
+    </entity>
+    <entity name="InstantData" representedClassName="InstantData" syncable="YES">
+        <attribute name="temperature" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="ForecastCollection" positionX="-45" positionY="0" width="128" height="73"/>
+        <element name="Forecast" positionX="-18" positionY="45" width="128" height="88"/>
+        <element name="Hour" positionX="9" positionY="72" width="128" height="73"/>
+        <element name="InstantData" positionX="27" positionY="99" width="128" height="58"/>
+    </elements>
+</model>

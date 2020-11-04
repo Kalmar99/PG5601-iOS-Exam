@@ -41,7 +41,6 @@ class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBar
     }
    
     func getWeatherData(lat: Double, lon: Double) {
-        DispatchQueue.init(label: "Get Api Data").async {
             //get a fetcher object to handle the request & parsing
             let fetcher = FetchData(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
             fetcher.getWeatherDescription() {(result) in
@@ -72,7 +71,6 @@ class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBar
                 case .failure(let error):
                     print(error)
             }}
-        }
     }
     
     func locationUpdated(lat: Double, lon: Double) {

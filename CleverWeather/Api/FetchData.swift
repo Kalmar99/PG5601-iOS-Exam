@@ -23,6 +23,8 @@ enum DescriptionResponse {
 }
 
 class FetchData {
+    
+    let storage = StorageManager()
 
     var endpoint: String
 
@@ -48,7 +50,7 @@ class FetchData {
         
     }
     
-    func getWeatherByCords(lat: Double, lon: Double, complete: @escaping (FetchWeatherResponse) -> Void){
+    func getApiByCords(lat: Double, lon: Double, complete: @escaping (FetchWeatherResponse) -> Void){
         let coords = (lat: String(format: "%.2f",lat), lon: String(format: "%.2f", lon))
         get(url: "\(endpoint)?lat=\(coords.lat)&lon=\(coords.lon)",complete: {(result) in
             switch result {
@@ -57,6 +59,7 @@ class FetchData {
                     let weather : CurrentWeather = {
                         let unformatted = parser.parseWeather(data: data)
                         let formatted = parser.format(unformatted)
+                        self.storage.save(json: data)
                         return (hours: formatted.hours, instant: formatted.instant, units: unformatted.properties.meta.units)
                     }()
                     complete(.success(weather))
@@ -64,6 +67,19 @@ class FetchData {
                     complete(.failure(error))
             }
         })
+    }
+    
+    func getWeatherByCords(lat: Double, lon: Double, complete: @escaping (FetchWeatherResponse) -> Void){
+        if storage.isData() {
+            let data = storage.read()
+            if data != nil {
+                complete(.success(data!))
+                print("Loaded data from file")
+            }
+        } else {
+            getApiByCords(lat: lat, lon: lon, complete: complete )
+            print("Loaded data from api")
+        }
     }
     
     func getWeatherDescription(complete: @escaping (DescriptionResponse) -> Void) {

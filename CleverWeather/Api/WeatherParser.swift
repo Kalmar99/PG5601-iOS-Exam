@@ -1,9 +1,7 @@
 //
 //  ParseWeatherResponse.swift
 //  CleverWeather
-//
-//  Created by REDACTED on 10/26/20.
-//
+
 
 import Foundation
 
@@ -36,11 +34,8 @@ class WeatherParser {
     
     func format(_ data: WeatherResponse) -> ParsedWeather {
         let time = Calendar.current.dateComponents([.month,.day,.hour], from: Date())
-        let weather = {
-            return data.properties.timeseries.filter { weather in
-                return Calendar.current.dateComponents([.month,.day,.hour], from: weather.time) == time
-            }[0]
-        }()
+        
+        let weather = data.properties.filter(date: Date())
         
         var currentWeather = [NextHours]()
         let noData = NextHours(summary: Summary(symbol_code: "No Data"),details: nil)
@@ -58,4 +53,14 @@ class WeatherParser {
         
     }
     
+}
+
+extension Properties {
+    func filter(date: Date) -> Timeseries {
+        let now = Calendar.current.dateComponents([.month,.day,.hour], from: date)
+        
+        return self.timeseries.filter { weather in
+            return Calendar.current.dateComponents([.month,.day,.hour], from: weather.time) == now
+        }[0]
+    }
 }
