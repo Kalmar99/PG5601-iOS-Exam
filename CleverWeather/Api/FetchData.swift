@@ -18,6 +18,10 @@ enum FetchWeatherResponse {
     case success(CurrentWeather), failure(Error)
 }
 
+enum fetchSimpleResponse {
+    case success(ParsedSimpleWeather), failure(Error)
+}
+
 enum DescriptionResponse {
     case success([String : AnyObject]), failure(Error)
 }
@@ -55,13 +59,8 @@ class FetchData {
         get(url: "\(endpoint)?lat=\(coords.lat)&lon=\(coords.lon)",complete: {(result) in
             switch result {
                 case .success(let data):
-                    let parser = WeatherParser()
-                    let weather : CurrentWeather = {
-                        let unformatted = parser.parseWeather(data: data)
-                        let formatted = parser.format(unformatted)
-                        self.storage.save(json: data)
-                        return (hours: formatted.hours, instant: formatted.instant, units: unformatted.properties.meta.units)
-                    }()
+                    let weather = self.parseDaily(data)
+                    self.storage.save(json: data)
                     complete(.success(weather))
                 case .failure(let error):
                     complete(.failure(error))
@@ -69,11 +68,70 @@ class FetchData {
         })
     }
     
+    func getApiSimpleByCords(lat: Double, lon: Double, complete: @escaping (fetchSimpleResponse) -> Void){
+        let coords = (lat: String(format: "%.2f",lat), lon: String(format: "%.2f", lon))
+        get(url: "\(endpoint)?lat=\(coords.lat)&lon=\(coords.lon)",complete: {(result) in
+            switch result {
+                case .success(let data):
+                    let weather = self.parseSimple(data)
+                    self.storage.save(json: data)
+                    complete(.success(weather))
+                case .failure(let error):
+                    complete(.failure(error))
+            }
+        })
+    }
+    
+    
+    
+    func getSimpleWeather(lat: Double, lon: Double, complete: @escaping (fetchSimpleResponse) -> Void) {
+        if storage.isData() {
+            let data = storage.read()
+            if data != nil {
+                let weather = parseSimple(data!)
+                complete(.success(weather))
+                print("Got data from disk")
+            } else {
+                complete(.failure(NSError()))
+            }
+        } else {
+            getApiSimpleByCords(lat: lat, lon: lon, complete: complete)
+            print("Got data from api")
+        }
+    }
+    
+    func parseSimple(_ data: String) -> ParsedSimpleWeather {
+        let simple : ParsedSimpleWeather = try! {
+            let parser = WeatherParser()
+            let unformatted = parser.parseWeather(data: data)
+            let formatted = parser.formatSimple(unformatted)
+            if formatted != nil {
+                return formatted!
+            } else {
+                // Neeed to do something here, just crash for now if it doesent work
+                throw NSError(domain: "com.example.cleverWeather", code: 1337, userInfo: ["error":"123"])
+            }
+           
+        }()
+        return simple
+    }
+    
+    func parseDaily(_ data: String) -> CurrentWeather {
+        let daily : CurrentWeather = {
+            let parser = WeatherParser()
+            let unformatted = parser.parseWeather(data: data)
+            let formatted = parser.formatDaily(unformatted)
+            return (hours: formatted.hours, instant: formatted.instant, units: unformatted.properties.meta.units)
+        }()
+        return daily
+    }
+    
     func getWeatherByCords(lat: Double, lon: Double, complete: @escaping (FetchWeatherResponse) -> Void){
         if storage.isData() {
             let data = storage.read()
             if data != nil {
-                complete(.success(data!))
+                let weather = parseDaily(data!)
+                complete(.success(weather))
                 print("Loaded data from file")
             }
         } else {

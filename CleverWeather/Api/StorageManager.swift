@@ -40,16 +40,14 @@ class StorageManager {
     
     
     
-    func read() -> CurrentWeather? {
+    func read() -> String? {
         let fileURL = URL(fileURLWithPath: filename, relativeTo: directoryURL).appendingPathExtension(extention)
 
         do {
             let data = try Data(contentsOf: fileURL)
             let parser = WeatherParser()
             if let string = String(data: data, encoding: .utf8) {
-                let unformatted = parser.parseWeather(data: string)
-                let formatted = parser.format(unformatted)
-                return (hours: formatted.hours, instant: formatted.instant, units: unformatted.properties.meta.units)
+                return string;
             }
         } catch let error {
             print(error)

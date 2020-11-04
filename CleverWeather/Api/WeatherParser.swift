@@ -11,6 +11,7 @@ struct test : Decodable {
 }
 
 typealias ParsedWeather = (hours: [NextHours], instant: InstantDetails)
+typealias ParsedSimpleWeather = (timeseries: [Timeseries],todayIndex: Int)
 
 class WeatherParser {
     
@@ -32,7 +33,17 @@ class WeatherParser {
         
     }
     
-    func format(_ data: WeatherResponse) -> ParsedWeather {
+    
+    
+    func formatSimple(_ data: WeatherResponse) -> ParsedSimpleWeather? {
+        guard let todayIndex = data.properties.indexOnDate(Date()) else {
+            return nil
+        }
+    
+        return (timeseries: data.properties.timeseries, todayIndex: todayIndex)
+    }
+    
+    func formatDaily(_ data: WeatherResponse) -> ParsedWeather {
         let time = Calendar.current.dateComponents([.month,.day,.hour], from: Date())
         
         let weather = data.properties.filter(date: Date())
@@ -40,7 +51,7 @@ class WeatherParser {
         var currentWeather = [NextHours]()
         let noData = NextHours(summary: Summary(symbol_code: "No Data"),details: nil)
         
-        let hours : [NextHours?] = [weather.data.next1hours,weather.data.next6hours,weather.data.next12hours]
+        let hours : [NextHours?] = [weather[0].data.next1hours,weather[0].data.next6hours,weather[0].data.next12hours]
         for hour in hours {
             if hour != nil {
                 currentWeather.append(hour!)
@@ -49,18 +60,28 @@ class WeatherParser {
             }
         }
         
-        return ParsedWeather(hours: currentWeather, instant: weather.data.instant.details)
+        return ParsedWeather(hours: currentWeather, instant: weather[0].data.instant.details)
         
     }
+    
     
 }
 
 extension Properties {
-    func filter(date: Date) -> Timeseries {
+    func filter(date: Date) -> [Timeseries] {
         let now = Calendar.current.dateComponents([.month,.day,.hour], from: date)
         
         return self.timeseries.filter { weather in
             return Calendar.current.dateComponents([.month,.day,.hour], from: weather.time) == now
-        }[0]
+        }
+    }
+    func indexOnDate(_ date: Date) -> Int? {
+        for (index, weather) in self.timeseries.enumerated() {
+            if(Calendar.current.isDateInToday(weather.time)) {
+                return index
+            }
+        }
+        
+        return nil
     }
 }

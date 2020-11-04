@@ -16,11 +16,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-        
-        //getUsersLocation()
+        getUsersLocation()
         
     }
     
@@ -39,11 +35,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     func getWeatherData(lat: Double, lon: Double) {
         let fetcher = FetchData(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
-        fetcher.getWeatherByCords(lat: lat, lon: lon) { (response) in
+        fetcher.getSimpleWeather(lat: lat, lon: lon) { (response) in
             switch response {
-                case .success( let currentWeather):
+                case .success( let weather):
                     DispatchQueue.main.async {
                         self.locationManager.stopUpdatingLocation()
+                        let imgName = weather.timeseries[0].data.next12hours?.summary.symbol_code
+                        let img = UIImage(named: imgName!)
+                        
+                        let weekday = Calendar(identifier: .gregorian).component(.weekday, from: weather.timeseries[0].time)
+                        let dayName = Calendar.current.weekdaySymbols[weekday-1]
+                        
+                        self.simpleForecast.updateContent(image: img!, day: dayName, umbrella: true)
+                        
+                        
                     }
                 case .failure(let error):
                     print(error)
