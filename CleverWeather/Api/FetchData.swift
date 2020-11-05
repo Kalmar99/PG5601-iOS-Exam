@@ -14,8 +14,22 @@ enum GetResponse {
 
 typealias CurrentWeather = (hours: [NextHours],instant: InstantDetails, units: Units)
 
+enum FetchErrorCodes {
+    case noInternet
+    case storageError
+    case unknownError
+    case noData
+}
+
+struct FetchError {
+    let code: FetchErrorCodes
+    let reason: String
+    let description: String
+    let error : Error
+}
+
 enum FetchWeatherResponse {
-    case success(CurrentWeather), failure(Error)
+    case success(CurrentWeather), failure(FetchError)
 }
 
 enum fetchSimpleResponse {
@@ -63,7 +77,12 @@ class FetchData {
                     self.storage.save(json: data)
                     complete(.success(weather))
                 case .failure(let error):
-                    complete(.failure(error))
+                    if error.localizedDescription == "The Internet connection appears to be offline." {
+                        complete(.failure(FetchError(code: .noInternet, reason: "No internet", description: "getApiByCords: line 63, FetchData.swift",error: error)))
+                    } else {
+                        complete(.failure(FetchError(code: .unknownError, reason: error.localizedDescription, description: "getApiByCords: line 63, FetchData.swift", error: error)))
+                    }
+                    
             }
         })
     }
@@ -127,17 +146,36 @@ class FetchData {
     }
     
     func getWeatherByCords(lat: Double, lon: Double, complete: @escaping (FetchWeatherResponse) -> Void){
-        if storage.isData() {
-            let data = storage.read()
-            if data != nil {
-                let weather = parseDaily(data!)
-                complete(.success(weather))
-                print("Loaded data from file")
-            }
-        } else {
-            getApiByCords(lat: lat, lon: lon, complete: complete )
-            print("Loaded data from api")
+   
+        //Try to get data from api
+        getApiByCords(lat: lat, lon: lon) { result in
+                switch result {
+                    case .success(let weahter):
+                        //Got data, move on
+                        complete(.success(weahter))
+                        print("Successfully got data from api")
+                    case .failure(let error):
+                        //Did not get data, find out why:
+                        if(error.code == .noInternet) {
+                            if self.storage.isData() {
+                                //Found data on disk, move on:
+                                let data = self.storage.read()
+                                if data != nil {
+                                    let weather = self.parseDaily(data!)
+                                    complete(.success(weather))
+                                    print("Could not connect to the internet but found data on disk")
+                                } else {
+                                    complete(.failure(FetchError(code: .storageError, reason: "Failed to retrieve data from disk", description: "GetWeatherByCords, FetchData.swift", error: error.error)))
+                                }
+                            } else {
+                                //Did not find data at all, fail:
+                                let fail = FetchError(code: .noData, reason: "Could not get data", description: "GetWeatherByCords, FetchData.swift",error: error.error)
+                                complete(.failure(fail))
+                            }
+                        }
+                }
         }
+        
     }
     
     func getWeatherDescription(complete: @escaping (DescriptionResponse) -> Void) {

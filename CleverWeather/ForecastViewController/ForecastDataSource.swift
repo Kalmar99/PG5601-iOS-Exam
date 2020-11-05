@@ -51,6 +51,7 @@ class ForecastDataSource: NSObject, UITableViewDataSource {
             cell.timeLabel.text = "Now"
             cell.statusLabel.text = "\(String(format: "%.1f", details.air_temperature)) \(units!.air_temperature)"
         } else if (weatherData is NextHours) {
+            print(indexPath.row)
             cell.timeLabel.text = time[indexPath.row];
             cell.measureTextLabel.text = "Weather";
             let hour = weather[indexPath.section][indexPath.row] as! NextHours

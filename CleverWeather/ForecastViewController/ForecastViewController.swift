@@ -14,9 +14,11 @@ struct weatherData {
 }
 
 class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBarControllerDelegate {
-    
+   
+
     @IBOutlet weak var forecastTable : UITableView!;
     @IBOutlet weak var latLonLabel : UILabel!;
+    @IBOutlet weak var errorLabel : UILabel!
     
     let forecastDataSource = ForecastDataSource()
     var weather : [[WeatherData]] = [
@@ -58,6 +60,10 @@ class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBar
             switch(result) {
                 case .success(let weatherData):
                     DispatchQueue.main.async {
+                        self.forecastDataSource.weather = [
+                            [],
+                            []
+                        ]
                         self.forecastDataSource.weather[0].append(weatherData.instant)
                         self.forecastDataSource.weather[1].append(contentsOf: weatherData.hours)
                         self.forecastDataSource.units = weatherData.units
@@ -69,9 +75,21 @@ class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBar
                         }
                     }
                 case .failure(let error):
-                    print(error)
+                    switch error.code {
+                        case .storageError:
+                            //Famous last words: "This should never happen"
+                            print("Storage Error")
+                        case .noData:
+                            //Most common, means no internet & no data on disk
+                            DispatchQueue.main.async {
+                                self.errorLabel.text = "Cant retrieve data, no internet"
+                            }
+                        default:
+                            print(error.description)
+                            print(error.reason)
+                            print(error.error)
             }}
-    }
+            }}
     
     func locationUpdated(lat: Double, lon: Double) {
         print(lat,lon)
@@ -94,4 +112,5 @@ class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBar
     }
     
 }
+
 

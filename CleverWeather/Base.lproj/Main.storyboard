@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8kN-0Z-qYK">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                                <rect key="frame" x="0.0" y="12" width="414" height="675"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="forecastCell" rowHeight="91" id="W9q-fZ-ygI" customClass="ForecastCell" customModule="CleverWeather" customModuleProvider="target">
@@ -86,17 +86,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U30-vP-PW5">
+                                <rect key="frame" x="207" y="4" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="GSB-kC-8cR" firstAttribute="top" secondItem="8kN-0Z-qYK" secondAttribute="bottom" constant="8" id="04K-U5-YGw"/>
-                            <constraint firstItem="GSB-kC-8cR" firstAttribute="top" secondItem="8kN-0Z-qYK" secondAttribute="bottom" constant="8" symbolic="YES" id="56N-r3-x3b"/>
-                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6Ov-oo-LAL"/>
-                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Aeq-Lw-052"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GSB-kC-8cR" secondAttribute="bottom" constant="9" id="DOL-Y1-yQd"/>
-                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Jvc-qR-maW"/>
                             <constraint firstItem="GSB-kC-8cR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="PrG-u5-Dks"/>
+                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="top" secondItem="U30-vP-PW5" secondAttribute="bottom" constant="8" symbolic="YES" id="QFP-re-Jgp"/>
+                            <constraint firstItem="U30-vP-PW5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xp1-9w-swB"/>
+                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cRU-et-AtA"/>
+                            <constraint firstItem="GSB-kC-8cR" firstAttribute="top" secondItem="8kN-0Z-qYK" secondAttribute="bottom" constant="8" symbolic="YES" id="dog-hO-eaH"/>
+                            <constraint firstItem="8kN-0Z-qYK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qme-CH-gM2"/>
+                            <constraint firstItem="U30-vP-PW5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="sh4-x6-6RD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Forecast" image="sun.max" catalog="system" id="ass-Ij-Vm0">

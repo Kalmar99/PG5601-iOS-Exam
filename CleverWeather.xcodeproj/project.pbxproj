@@ -131,6 +131,7 @@
 		CE1DDE212546C22C009D144A /* CleverWeather */ = {
 			isa = PBXGroup;
 			children = (
+				CEE6020B2553EDD2009CFBA2 /* Utils */,
 				CEA9BD222551673A00C3079F /* Custom Views */,
 				CEA9BD3225516AF200C3079F /* HomeViewController */,
 				CE96CF4E25501D3F00C7DBDB /* MapsViewController */,
@@ -237,6 +238,13 @@
 				CEA9BD3325516B1A00C3079F /* HomeViewController.swift */,
 			);
 			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		CEE6020B2553EDD2009CFBA2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
