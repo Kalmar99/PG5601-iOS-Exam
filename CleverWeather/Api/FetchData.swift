@@ -33,7 +33,7 @@ enum FetchWeatherResponse {
 }
 
 enum fetchSimpleResponse {
-    case success(ParsedSimpleWeather), failure(Error)
+    case success(ParsedSimpleWeather), failure(FetchError)
 }
 
 enum DescriptionResponse {
@@ -96,7 +96,12 @@ class FetchData {
                     self.storage.save(json: data)
                     complete(.success(weather))
                 case .failure(let error):
-                    complete(.failure(error))
+                    if error.localizedDescription == "The Internet connection appears to be offline." {
+                        complete(.failure(FetchError(code: .noInternet, reason: "Cant get data", description: "getApiSimpleByCords", error: error)))
+                    } else {
+                        complete(.failure(FetchError(code: .unknownError, reason: "Cant get data", description: "getApiSimpleByCords", error: error)))
+                    }
+                    
             }
         })
     }
@@ -104,18 +109,33 @@ class FetchData {
     
     
     func getSimpleWeather(lat: Double, lon: Double, complete: @escaping (fetchSimpleResponse) -> Void) {
-        if storage.isData() {
-            let data = storage.read()
-            if data != nil {
-                let weather = parseSimple(data!)
-                complete(.success(weather))
-                print("Got data from disk")
-            } else {
-                complete(.failure(NSError()))
+        
+        getApiSimpleByCords(lat: lat, lon: lon) { result in
+            switch result {
+                case .success(let weather):
+                    complete(.success(weather))
+                    print("Got data from api")
+                case .failure(let error):
+                    switch error.code {
+                        case .noInternet:
+                            if self.storage.isData() {
+                                let data = self.storage.read()
+                                if data != nil {
+                                    let weather = self.parseSimple(data!)
+                                    complete(.success(weather))
+                                    print("Got data from disk")
+                                } else {
+                                    complete(.failure(error))
+                                }
+                            } else {
+                                complete(.failure(FetchError(code: .noData, reason: "No data on disk", description: "getApiSimpleByCords", error: error.error)))
+                            }
+                            
+                        default:
+                            complete(.failure(error))
+                        
+                    }
             }
-        } else {
-            getApiSimpleByCords(lat: lat, lon: lon, complete: complete)
-            print("Got data from api")
         }
     }
     
