@@ -32,11 +32,38 @@ enum FetchResponse {
     case failure(FetchError)
 }
 
+protocol ForecastFetcherDelegate {
+    func updateDailyWeather(forecast: DailyForecast)
+    func updateError(error: FetchError) -> Void
+    func updateDescriptions(_ descriptions: [String : AnyObject]) -> Void
+    
+    func updateSimpleWeather(forecast: SimpleForecast2) -> Void
+}
+
+extension ForecastFetcherDelegate {
+    func updateDailyWeather(forecast: DailyForecast) -> Void {
+        return
+    }
+    func updateError(error: FetchError) -> Void{
+        return
+    }
+    
+    func updateDescriptions(_ descriptions: [String : AnyObject]) -> Void {
+        return;
+    }
+    
+    func updateSimpleWeather(forecast: SimpleForecast2) -> Void {
+        return;
+    }
+    
+}
+
 import Foundation
 
 class ForecastFetcher {
     
     var endpoint : String
+    var delegate : ForecastFetcherDelegate?
     
     init(endpoint: String) {
         self.endpoint = endpoint
@@ -71,24 +98,50 @@ class ForecastFetcher {
             }
             
             storage.save(json: dataString!)
-            complete(.success(Data(base64Encoded: dataString!)!))
+        
+            complete(.success(dataString!.data(using: .utf8)!))
         } else {
             fetch(url, complete: complete)
         }
     }
 
-    func getSimpleForecast(lat: Double, lon: Double, complete: @escaping (SimpleForecastResponse) -> Void) {
-        
+    func getSimpleForecast(lat: Double, lon: Double) {
+        getData(lat: lat, lon: lon) { data in
+            switch data {
+                case .success(let data):
+                    let json = String(data: data, encoding: .utf8)
+                    let simpleForecast = WeatherParser().parseSimpleForecast(json!)
+                    self.delegate?.updateSimpleWeather(forecast: simpleForecast!)
+                case .failure(let error):
+                    self.delegate?.updateError(error: error)
+            }
+        }
     }
     
-    func getDailyForecast(lat: Double, lon: Double, complete: @escaping (DailyForecastResponse) -> Void) {
+    func getDailyForecast(lat: Double, lon: Double){
         getData(lat: lat, lon: lon) { data in
             switch data {
                 case .success(let data):
                     let dailyForecast = WeatherParser().parseDailyForecast(String(data: data,encoding: .utf8)!)
-                    complete(.success(dailyForecast))
+                    self.delegate?.updateDailyWeather(forecast: dailyForecast)
                 case .failure(let error):
-                    complete(.failure(error))
+                    self.delegate?.updateError(error: error)
+            }
+        }
+    }
+    
+    func getWeatherDescription(){
+        fetch("https://api.met.no/weatherapi/weathericon/2.0/legends") { (result) in
+            switch result {
+                case .success(let json):
+                    do {
+                        let descriptions = try JSONSerialization.jsonObject(with: json, options: .mutableContainers) as! [String: AnyObject]
+                        self.delegate?.updateDescriptions(descriptions)
+                    } catch let error {
+                        print("Failed JSON serialization: \(error)")
+                    }
+                case .failure(let error):
+                    self.delegate?.updateError(error: error)
             }
         }
     }

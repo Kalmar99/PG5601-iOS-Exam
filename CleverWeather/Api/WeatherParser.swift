@@ -71,13 +71,23 @@ class WeatherParser {
         let noData = NextHours(summary: Summary(symbol_code: "No Data"), details: nil)
 
         let hours : [NextHours] = [forecast.data.next1hours,forecast.data.next6hours,forecast.data.next12hours].map { hour in
-            guard hour == nil else {
+            guard hour != nil else {
                 return noData
             }
             return hour!
         }
                 
         return DailyForecast(instant: forecast.data.instant, hours: hours, units: apiForecast.meta.units )
+    }
+    
+    func parseSimpleForecast(_ json: String) -> SimpleForecast2? {
+        
+        let weather = parseWeather(data: json)
+        guard let todayIndex = weather.properties.indexOnDate(Date()) else {
+            return nil;
+        }
+       
+        return SimpleForecast2(timeseries: weather.properties.timeseries, todayIndex: todayIndex)
     }
     
     

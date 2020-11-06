@@ -155,6 +155,7 @@ class FetchData {
         return simple
     }
     
+    
     func parseDaily(_ data: String) -> CurrentWeather {
         let daily : CurrentWeather = {
             let parser = WeatherParser()
@@ -196,7 +197,7 @@ class FetchData {
                 }
         }
         
-    }
+    } 
     
     func getWeatherDescription(complete: @escaping (DescriptionResponse) -> Void) {
         get(url: "https://api.met.no/weatherapi/weathericon/2.0/legends",complete: {(result) in

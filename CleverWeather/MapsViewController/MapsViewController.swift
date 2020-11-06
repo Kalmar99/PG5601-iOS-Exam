@@ -17,7 +17,7 @@ protocol WeatherDetailsDelegate {
     func updateData(lat: Double, lon: Double, data: NextHours)
 }
 
-class MapsViewController: UIViewController, CLLocationManagerDelegate,UITabBarControllerDelegate {
+class MapsViewController: UIViewController,UITabBarControllerDelegate, CLLocationManagerDelegate,WeatherDetailDelegate {
     
     @IBOutlet weak var mapView : MKMapView!;
     @IBOutlet weak var switchButton : UISwitch!;
@@ -26,26 +26,36 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate,UITabBarCo
     var lat: Double? = nil
     var lon: Double? = nil
     
+    var annontationCords : (lat: Double, lon: Double)?
+    
     var locationUpdateDelegate: locationUpdateDelegate?
     
     let locationManager = CLLocationManager()
+    
+    let api = ForecastFetcher(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Map"
-
+        
+        
+        tabBarController?.delegate = self;
+        api.delegate = weatherDetails
+        locationManager.delegate = self;
+        weatherDetails.delegate = self;
+    
         //Configure location manager
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 1000.0;
-        locationManager.delegate = self;
         
-        tabBarController?.delegate = self;
         
         if(switchButton.isOn) {
             locationManager.startUpdatingLocation()
             mapView.showsUserLocation = true;
         }
+        
         // Set start location
         let location = CLLocation(latitude: 59.91, longitude: 10.74);
         let hk = MapPoint(title: "Høyskolen Kristiania", locationName: "Dronningens Gate",
@@ -68,8 +78,9 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate,UITabBarCo
             
             let point = MapPoint(title: "Selected",locationName: "User Selected", coordinate: cords)
             mapView.addAnnotation(point)
-            
-            getLocationData(lat: cords.latitude, lon: cords.longitude)
+            print("Touch")
+            annontationCords = (lat: cords.latitude, lon: cords.longitude)
+            api.getDailyForecast(lat: cords.latitude, lon: cords.longitude)
             
         }
         
@@ -85,36 +96,33 @@ class MapsViewController: UIViewController, CLLocationManagerDelegate,UITabBarCo
         }
     }
     
-    func getLocationData(lat: Double, lon: Double) {
-        let fetcher = FetchData(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
-        fetcher.getWeatherByCords(lat: lat, lon: lon) { (result) in
-            switch(result) {
-                case .success(let data):
-                    DispatchQueue.main.async {
-                        self.weatherDetails.updateData(lat: lat, lon: lon, data: data.hours[0])
-                    }
-                case .failure(let error):
-                    print(error)
-        }}
-    }
-    
     //Delegate functions:
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations[locations.count-1]
-        lat = location.coordinate.latitude
-        lon = location.coordinate.longitude
-    }
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if(viewController is ForecastViewController) {
+            
+            print(lat,lon)
             guard lat != nil && lon != nil else {
                 return;
             }
             locationUpdateDelegate?.locationUpdated(lat: lat!, lon: lon!)
         }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count-1]
+        lat = location.coordinate.latitude
+        lon = location.coordinate.longitude
+        print("Location!")
+        print(lat,lon)
+    }
+    
+    func getLocation() -> (lat: Double?, lon: Double?) {
         
+        return annontationCords!
+    }
+    
+
 }
 
 private extension MKMapView {

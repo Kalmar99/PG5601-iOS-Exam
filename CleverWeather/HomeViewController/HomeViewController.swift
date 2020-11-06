@@ -8,20 +8,20 @@
 import UIKit
 import CoreLocation
 
-class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleForecastDelegate {
+class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleForecastDelegate,ForecastFetcherDelegate {
     
     @IBOutlet weak var simpleForecast : SimpleForecast!
     let locationManager = CLLocationManager()
-    var forecasts : ParsedSimpleWeather?
+    var forecasts : SimpleForecast2?
     var currentIndex : Int?
     var lastDate: Date?
+    let api = ForecastFetcher(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
 
-    
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         getUsersLocation()
         simpleForecast.delegate = self;
+        api.delegate = self;
     }
     
     func getUsersLocation() {
@@ -34,14 +34,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count-1]
-        print("Got location")
-        getWeatherData(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
+        print("Got location1")
+        api.getSimpleForecast(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
         locationManager.stopUpdatingLocation()
     }
     
-    func setForecast(forecast: ParsedSimpleWeather) {
+    func setForecast(forecast: SimpleForecast2) {
             
-        
         let imgName = forecast.timeseries[forecast.todayIndex].data.next12hours?.summary.symbol_code
         let img = UIImage(named: imgName!)
         let weekday = Calendar(identifier: .gregorian).component(.weekday, from: forecast.timeseries[forecast.todayIndex].time)
@@ -50,53 +49,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
         simpleForecast.updateContent(image: img!, day: dayName, umbrella: umbrella)
         
     }
-    
-    func getWeatherData(lat: Double, lon: Double) {
-        let fetcher = FetchData(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
-        fetcher.getSimpleWeather(lat: lat, lon: lon) { (response) in
-            switch response {
-                case .success( let weather):
-                    DispatchQueue.main.async {
-                        
-                        /*
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "dd.MM.yy"
-                        let date = formatter.date(from: "08.11.20")
-                        print(date) */
-                        let date = Date()
-                        self.forecasts = weather
-                        let next = self.findNext(date: date)!
-                        self.lastDate = weather.timeseries[next].time;
-    
-                        let imgName = weather.timeseries[next].data.next12hours?.summary.symbol_code
-                        let img = UIImage(named: imgName!)
-                        
-                        let weekday = Calendar(identifier: .gregorian).component(.weekday, from: weather.timeseries[next].time)
-                        let dayName = Calendar.current.weekdaySymbols[weekday-1]
-                        let umbrella = self.needUmbrella(weather.timeseries[next].data.next12hours!.summary.symbol_code)
-                        
-                        self.simpleForecast.updateContent(image: img!, day: dayName, umbrella: umbrella)
-                        
-                        
-                    }
-                case .failure(let error):
-                    switch error.code {
-                        case .noData:
-                            DispatchQueue.main.async {
-                                // Show error to user.
-                                let img = UIImage(named: "noConnection")
-                                self.simpleForecast.updateContent(image: img!, day: "Cant retrieve forcast", umbrella: false)
-                            }
-                        default:
-                            print(error)
-                    }
-                    //print(error)
-            }
-        }
-
-    }
-    
-    
+   
     func needUmbrella(_ symbol: String) -> Bool {
         let weather = symbol.split{$0 == "_"}.map(String.init)
         
@@ -176,6 +129,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
         
         return nil
         
+    }
+    
+    func updateSimpleWeather(forecast: SimpleForecast2) {
+        let date = Date()
+        self.forecasts = forecast
+        let next = self.findNext(date: date)!
+        self.lastDate = forecast.timeseries[next].time;
+        setForecast(forecast: forecast)
     }
     
 

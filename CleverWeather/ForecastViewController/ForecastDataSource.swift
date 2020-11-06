@@ -9,7 +9,7 @@ import UIKit
 
 class ForecastDataSource: NSObject, UITableViewDataSource {
     
-    var weather : [[WeatherData]] = [
+    var weather : [[ForecastData]] = [
         [],
         []
     ]

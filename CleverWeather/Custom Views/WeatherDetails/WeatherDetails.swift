@@ -6,13 +6,24 @@
 //
 
 import UIKit
+import CoreLocation
 
-class WeatherDetails: UIView,WeatherDetailsDelegate {
+protocol WeatherDetailDelegate {
+    func getLocation() -> (lat: Double?, lon: Double?)
+}
+
+class WeatherDetails: UIView,WeatherDetailsDelegate, ForecastFetcherDelegate {
     
     @IBOutlet weak var latLabel : UILabel!;
     @IBOutlet weak var lonLabel : UILabel!;
     @IBOutlet weak var contentView: UIView!;
     @IBOutlet weak var symbolImageView : UIImageView!;
+    
+    var delegate: WeatherDetailDelegate?
+    
+    let locationManager = CLLocationManager()
+    var lat: Double?
+    var lon: Double?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,6 +33,13 @@ class WeatherDetails: UIView,WeatherDetailsDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initViews()
+    }
+    
+    func initViews() {
+        let nib = UINib(nibName: "WeatherDetails", bundle: nil)
+        nib.instantiate(withOwner: self, options: nil)
+        contentView.frame = self.bounds;
+        addSubview(contentView)
     }
     
     func updateData(lat: Double, lon: Double, data: NextHours) {
@@ -34,12 +52,18 @@ class WeatherDetails: UIView,WeatherDetailsDelegate {
         print(data)
     }
     
-    func initViews() {
-        let nib = UINib(nibName: "WeatherDetails", bundle: nil)
-        nib.instantiate(withOwner: self, options: nil)
-        contentView.frame = self.bounds;
-        addSubview(contentView)
+    func updateDailyWeather(forecast: DailyForecast) {
+        
+        let cords = delegate?.getLocation()
+        print(cords)
+        guard cords?.lat != nil && cords?.lon != nil else {
+            return
+        }
+    
+        self.updateData(lat: cords!.lat! , lon: cords!.lon! , data: forecast.hours[0])
     }
+    
+    
   
 }
 

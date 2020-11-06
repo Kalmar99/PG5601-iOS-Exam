@@ -7,21 +7,19 @@
 
 import UIKit
 
-struct weatherData {
-    var time: String = ""
-    var status: String = ""
-    var measure: String?
-}
+protocol ForecastData {}
 
-class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBarControllerDelegate {
+class ForecastViewController: UIViewController,UITabBarControllerDelegate,locationUpdateDelegate,ForecastFetcherDelegate {
    
 
     @IBOutlet weak var forecastTable : UITableView!;
     @IBOutlet weak var latLonLabel : UILabel!;
     @IBOutlet weak var errorLabel : UILabel!
     
+    let api = ForecastFetcher(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
+    
     let forecastDataSource = ForecastDataSource()
-    var weather : [[WeatherData]] = [
+    var weather : [[ForecastData]] = [
         [],
         []
     ]
@@ -35,70 +33,22 @@ class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBar
         self.navigationItem.title = "Weather Forecast"
         
         forecastTable.dataSource = forecastDataSource;
-        
-        // Get the api data
-        getWeatherData(lat: 59.91, lon: 10.74)
+        api.delegate = self;
+        api.getWeatherDescription()
+        api.getDailyForecast(lat: 59.91, lon: 10.74)
         latLonLabel.text = "Høyskolen Kristiania"
            
     }
    
-    func getWeatherData(lat: Double, lon: Double) {
-            //get a fetcher object to handle the request & parsing
-            let fetcher = FetchData(endpoint: "https://api.met.no/weatherapi/locationforecast/2.0/compact")
-            fetcher.getWeatherDescription() {(result) in
-                switch result {
-                    case .success(let descriptions):
-                        DispatchQueue.main.async {
-                            self.forecastDataSource.descriptions = descriptions
-                            self.forecastTable.reloadData()
-                        }
-                    case .failure(let error):
-                        print(error)
-                }
-            }
-            fetcher.getWeatherByCords(lat: lat, lon: lon) { (result) in
-            switch(result) {
-                case .success(let weatherData):
-                    DispatchQueue.main.async {
-                        self.forecastDataSource.weather = [
-                            [],
-                            []
-                        ]
-                        self.forecastDataSource.weather[0].append(weatherData.instant)
-                        self.forecastDataSource.weather[1].append(contentsOf: weatherData.hours)
-                        self.forecastDataSource.units = weatherData.units
-                        self.forecastTable.reloadData()
-                        if(lat == 59.91 && lon == 10.74) {
-                            self.latLonLabel.text = "Location: Høyskolen Kristiania"
-                        } else {
-                            self.latLonLabel.text = "Location: \(String(format: "%.2f",lat)), \(String(format: "%.2f",lon))"
-                        }
-                    }
-                case .failure(let error):
-                    switch error.code {
-                        case .storageError:
-                            //Famous last words: "This should never happen"
-                            print("Storage Error")
-                        case .noData:
-                            //Most common, means no internet & no data on disk
-                            DispatchQueue.main.async {
-                                self.errorLabel.text = "Cant retrieve data, no internet"
-                            }
-                        default:
-                            print(error.description)
-                            print(error.reason)
-                            print(error.error)
-            }}
-            }}
-    
     func locationUpdated(lat: Double, lon: Double) {
-        print(lat,lon)
+        print("updated")
         //Clear old data
         weather = [
             [],
             []
         ]
-        getWeatherData(lat: lat, lon: lon)
+        api.getDailyForecast(lat: lat, lon: lon)
+        latLonLabel.text = "\(String(format: "%.2f",lat)), \(String(format: "%.2f",lon))"
         
     }
     
@@ -106,9 +56,31 @@ class ForecastViewController: UIViewController, locationUpdateDelegate, UITabBar
         
         if(viewController is MapsViewController) {
             let view = viewController as! MapsViewController
+            print("delegate")
             view.locationUpdateDelegate = self;
         }
         
+    }
+    
+    func updateDailyWeather(forecast: DailyForecast) -> Void {
+        self.forecastDataSource.weather = [
+            [],
+            []
+        ]
+        self.forecastDataSource.weather[0].append(forecast.instant.details)
+        self.forecastDataSource.weather[1].append(contentsOf: forecast.hours)
+        self.forecastDataSource.units = forecast.units
+        self.forecastTable.reloadData()
+    }
+    
+    func updateError(error: FetchError) -> Void{
+        print(error)
+    }
+    
+    func updateDescriptions(descriptions: [String : AnyObject]) {
+        print("Did run")
+        self.forecastDataSource.descriptions = descriptions
+        self.forecastTable.reloadData()
     }
     
 }
