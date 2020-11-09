@@ -9,8 +9,18 @@ import CoreLocation
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleForecastDelegate,ForecastFetcherDelegate {
     
+    func resetBackground() {
+        self.view.backgroundColor = UIColor.systemBackground
+    }
+
+    
     @IBOutlet weak var simpleForecast : SimpleForecast!
     @IBOutlet weak var lastUpdatedLabel: UILabel!
+    
+    
+    @IBOutlet weak var drop1 : UIImageView!
+    @IBOutlet weak var drop2 : UIImageView!
+    @IBOutlet weak var drop3 : UIImageView!
     
     let locationManager = CLLocationManager()
     var forecasts : SimpleForecast2?
@@ -23,6 +33,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
         getUsersLocation()
         simpleForecast.delegate = self;
         api.delegate = self;
+        
+        drop1.image = nil;
+        drop2.image = nil;
+        drop3.image = nil
     }
     
     func getUsersLocation() {
@@ -46,7 +60,33 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
         let weekday = Calendar(identifier: .gregorian).component(.weekday, from: forecast.timeseries[forecast.todayIndex].time)
         let dayName = Calendar.current.weekdaySymbols[weekday-1]
         let umbrella = needUmbrella(forecast.timeseries[forecast.todayIndex].data.next12hours!.summary.symbol_code)
+        
+        if umbrella {
+            rainAnimation()
+        } else {
+            sunAnimation()
+        }
+        
         simpleForecast.updateContent(image: img!, day: dayName, umbrella: umbrella)
+        
+    }
+    
+    func sunAnimation () {
+        UIView.animate(withDuration: 3, delay: 1, options: [.allowAnimatedContent, .curveEaseIn, .allowUserInteraction], animations: {
+            self.view.backgroundColor = UIColor.yellow
+        })
+    }
+    
+    func rainAnimation () {
+        drop1.image = UIImage(named: "drop")
+        drop2.image = UIImage(named: "drop")
+        drop3.image = UIImage(named: "drop")
+        
+        UIView.animateKeyframes(withDuration: 8, delay: 0, options: .repeat) {
+            self.drop1.layer.anchorPoint.y = -40
+            self.drop2.layer.anchorPoint.y = -30
+            self.drop3.layer.anchorPoint.y = -45
+        }
         
     }
    
@@ -87,6 +127,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
     
     func getNextForecast() -> Timeseries?{
         
+        resetBackground()
+        
         guard forecasts != nil else {
             print("No Forecasts")
             return nil;
@@ -101,16 +143,31 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
         print()
         lastDate = tomorow
         
+        if !needUmbrella((forecasts?.timeseries[tomorowIndex!].data.next12hours?.summary.symbol_code)!) {
+            sunAnimation()
+        } else {
+            rainAnimation()
+        }
+        
         return forecasts?.timeseries[tomorowIndex!]
     }
     
     func getPreviousForecast() -> Timeseries? {
+        
+        resetBackground()
+
         
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: lastDate!)
         let yersterdayIndex = findNext(date: yesterday!)
         lastDate = yesterday
         guard yersterdayIndex != nil else {
             return nil
+        }
+        
+        if !needUmbrella((forecasts?.timeseries[yersterdayIndex!].data.next12hours?.summary.symbol_code)!) {
+            sunAnimation()
+        } else {
+            rainAnimation()
         }
         
         return forecasts?.timeseries[yersterdayIndex!]
@@ -132,6 +189,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
         let next = self.findNext(date: date)!
         self.lastDate = forecast.timeseries[next].time;
         setForecast(forecast: forecast)
+        
         lastUpdatedLabel.text = "Last updated: \(forecast.timeseries[0].time)"
     }
     

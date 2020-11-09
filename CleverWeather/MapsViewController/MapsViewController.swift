@@ -23,8 +23,12 @@ class MapsViewController: UIViewController,UITabBarControllerDelegate, CLLocatio
     @IBOutlet weak var switchButton : UISwitch!;
     @IBOutlet weak var weatherDetails: WeatherDetails!;
     
+    @IBOutlet weak var sliderConstraint: NSLayoutConstraint!
+    
     var lat: Double? = nil
     var lon: Double? = nil
+    
+    var slideUp = false;
     
     var annontationCords : (lat: Double, lon: Double)?
     
@@ -39,6 +43,10 @@ class MapsViewController: UIViewController,UITabBarControllerDelegate, CLLocatio
         super.viewDidLoad()
         self.navigationItem.title = "Map"
         
+      
+        
+        sliderConstraint.constant = 0;
+
         
         tabBarController?.delegate = self;
         api.delegate = weatherDetails
@@ -65,6 +73,15 @@ class MapsViewController: UIViewController,UITabBarControllerDelegate, CLLocatio
 
     }
     
+    func slideUpAnimation() {
+        UIView.animate(withDuration: 1, animations: {
+            self.sliderConstraint.constant = 99;
+            self.view.layoutIfNeeded()
+        })
+        
+        slideUp = true;
+    }
+    
     @IBAction func longPressAddAnnotation(sender: UILongPressGestureRecognizer) {
         
         if(sender.state == .began) {
@@ -81,7 +98,9 @@ class MapsViewController: UIViewController,UITabBarControllerDelegate, CLLocatio
             print("Touch")
             annontationCords = (lat: cords.latitude, lon: cords.longitude)
             api.getDailyForecast(lat: cords.latitude, lon: cords.longitude)
-            
+            if !slideUp {
+                slideUpAnimation()
+            }
         }
         
     }

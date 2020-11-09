@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,10 +22,14 @@
             <subviews>
                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ah1-mp-cIe">
                     <rect key="frame" x="87" y="328" width="240" height="240"/>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="CWI-Ky-TyG"/>
                         <constraint firstAttribute="height" constant="240" id="jgP-Wv-XEC"/>
                     </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="MJP-1R-lpT" appends="YES" id="b17-hr-if9"/>
+                    </connections>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPI-aW-idh">
                     <rect key="frame" x="207" y="592" width="0.0" height="0.0"/>
@@ -42,7 +45,6 @@
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="4Ai-n5-OeH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bgd-Qo-gqw"/>
@@ -68,10 +70,10 @@
                 <action selector="swipeLeft:" destination="-1" id="zIk-7b-Sfc"/>
             </connections>
         </swipeGestureRecognizer>
+        <tapGestureRecognizer id="MJP-1R-lpT">
+            <connections>
+                <action selector="didTapForecast:" destination="-1" id="pkK-2D-eAB"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

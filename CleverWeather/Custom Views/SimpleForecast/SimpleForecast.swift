@@ -1,9 +1,6 @@
 //
 //  SimpleForecast.swift
 //  CleverWeather
-//
-//  Created by Jonas on 11/3/20.
-//
 
 import UIKit
 
@@ -11,6 +8,7 @@ protocol SimpleForecastDelegate {
     func getForecastCount() -> Int?
     func getNextForecast() -> Timeseries?
     func getPreviousForecast() -> Timeseries?
+
 }
 
 class SimpleForecast: UIView {
@@ -19,6 +17,10 @@ class SimpleForecast: UIView {
     @IBOutlet weak var imageView : UIImageView!
     @IBOutlet weak var dayLabel : UILabel!
     @IBOutlet weak var statusLabel : UILabel!
+    
+    var anim = true;
+    var umbrella = false;
+    var taps = 0
     
     var delegate : SimpleForecastDelegate?
 
@@ -33,14 +35,26 @@ class SimpleForecast: UIView {
     }
     
     func updateContent(image: UIImage, day: String, umbrella: Bool) {
-        imageView.image = image;
+        
+        
+        
+        //imageView.image = image;
         dayLabel.text = day;
         if(day != "Cant retrieve forcast") {
             if(umbrella) {
+                self.imageView.layer.removeAllAnimations()
+                anim = false;
+                imageView.image = UIImage(named: "heavyrain")
                 statusLabel.text = "Bring an umbrella"
             } else {
+                anim = true;
+                self.rotateForever()
+                print("Started rotating")
+                imageView.image = UIImage(named:"clearsky_day")
                 statusLabel.text = "No need for an umbrella"
             }
+            self.umbrella = umbrella
+            
         } else {
             statusLabel.text = "Please connect to the internet"
         }
@@ -102,6 +116,99 @@ class SimpleForecast: UIView {
         
     }
     
+    func rotateForever() {
+        
+        UIView.animate(withDuration: 3, delay: 0, options: [.allowAnimatedContent, .curveEaseIn,.allowUserInteraction], animations: {
+            self.imageView.layer.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi))
+            }) { _ in
+            UIView.animate(withDuration: 3, delay: 0, options: [.allowAnimatedContent, .curveEaseOut,.allowUserInteraction], animations: {
+                
+                self.imageView.layer.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat.pi * 2.0))
+                }) { (finished) in
+                if self.anim {
+                        self.rotateForever()
+                    }
+                }
+            }
+        
+    }
+    
+    func rotate360() {
+        
+        /*
+            Parts of this function is copied from here:
+            https://stackoverflow.com/questions/34102331/rotate-uibutton-360-degrees/34102630
+            but modified to fit my project
+         */
+        
+        var transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        
+        UIView.animate(withDuration: 0.6, delay: 0.3, options: [.allowAnimatedContent, .curveEaseIn], animations: {
+            self.imageView.layer.setAffineTransform(transform)
+        }) { _ in
+            
+            UIView.animate(withDuration: 0.6, delay: 0, options: [.allowAnimatedContent, .curveEaseOut], animations: {
+                transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2.0)
+                self.imageView.layer.setAffineTransform(transform)
+            }) { _ in
+                UIView.animate(withDuration: 0.75, delay: 0, options: [.allowAnimatedContent, .curveEaseIn], animations: {
+                    transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
+                    self.imageView.layer.setAffineTransform(transform)
+                }) { _ in
+                    UIView.animate(withDuration: 0.3, delay: 0, options: [.allowAnimatedContent, .curveLinear], animations: {
+                        transform = CGAffineTransform(rotationAngle: -(CGFloat.pi * 1.5))
+                        self.imageView.layer.setAffineTransform(transform)
+                    }) { _ in
+                        UIView.animate(withDuration: 0.75, delay: 0, options: [.allowAnimatedContent, .curveEaseOut], animations: {
+                            transform = CGAffineTransform(rotationAngle: -(CGFloat.pi * 2))
+                            self.imageView.layer.setAffineTransform(transform)
+                        }) { (finished) in
+                            if !self.anim {
+                                if !self.umbrella {
+                                    self.rotateForever()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        
+        }
+    }
+    
+
+    func scaleUpDown() {
+        
+        UIView.animate(withDuration: 1, delay: 0.3, options: [.allowAnimatedContent, .curveEaseIn], animations: {
+            self.imageView.transform = CGAffineTransform(scaleX: 3.0, y: 3.0)
+        }) { _ in
+            UIView.animate(withDuration: 1 , delay: 0, options: [.allowAnimatedContent, .curveEaseOut], animations: {
+                self.imageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            }) { (finished) in
+                if !self.anim {
+                    if !self.umbrella {
+                        self.rotateForever()
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    @IBAction func didTapForecast(_ gestureRecognizer : UITapGestureRecognizer) {
+        if taps == 0 {
+            anim = false;
+            self.imageView.layer.removeAllAnimations()
+            rotate360()
+            taps += 1
+        } else if taps == 1 {
+            anim = false
+            self.imageView.layer.removeAllAnimations()
+            scaleUpDown()
+            taps = 0
+        }
+    }
+    
     func needUmbrella(_ symbol: String) -> Bool {
         let weather = symbol.split{$0 == "_"}.map(String.init)
         
@@ -132,5 +239,6 @@ class SimpleForecast: UIView {
             default: return false
         }
     }
+    
 
 }

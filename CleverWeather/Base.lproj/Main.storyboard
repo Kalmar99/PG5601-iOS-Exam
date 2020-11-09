@@ -169,6 +169,7 @@
                     <navigationItem key="navigationItem" title="Map" id="Lhv-iW-KGZ"/>
                     <connections>
                         <outlet property="mapView" destination="GNx-My-Bgx" id="Edy-Cg-1pk"/>
+                        <outlet property="sliderConstraint" destination="pEV-fM-RmB" id="Qb2-5K-4B3"/>
                         <outlet property="switchButton" destination="Mav-x7-i6Q" id="p5w-na-h1I"/>
                         <outlet property="weatherDetails" destination="MHL-lU-mbp" id="SgE-Xx-5Yf"/>
                     </connections>
@@ -192,8 +193,16 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ek-g5-0tD" customClass="SimpleForecast" customModule="CleverWeather" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="711"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="drop" translatesAutoresizingMaskIntoConstraints="NO" id="XDp-8y-30L">
+                                <rect key="frame" x="301" y="64" width="65" height="64"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="drop" translatesAutoresizingMaskIntoConstraints="NO" id="frv-rw-WkX">
+                                <rect key="frame" x="175" y="137" width="65" height="64"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="drop" translatesAutoresizingMaskIntoConstraints="NO" id="fhJ-bI-Liq">
+                                <rect key="frame" x="37" y="25" width="65" height="64"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yx8-l7-kMc">
                                 <rect key="frame" x="207" y="719" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -204,9 +213,15 @@
                         <viewLayoutGuide key="safeArea" id="Qln-Cr-a4f"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="XDp-8y-30L" firstAttribute="leading" secondItem="Qln-Cr-a4f" secondAttribute="leading" constant="301" id="0Yy-6X-AfY"/>
                             <constraint firstItem="yx8-l7-kMc" firstAttribute="centerX" secondItem="GiK-Vv-naG" secondAttribute="centerX" id="6c0-Pg-LQN"/>
+                            <constraint firstItem="frv-rw-WkX" firstAttribute="leading" secondItem="Qln-Cr-a4f" secondAttribute="leading" constant="175" id="Ear-DP-KCm"/>
+                            <constraint firstItem="Qln-Cr-a4f" firstAttribute="trailing" secondItem="XDp-8y-30L" secondAttribute="trailing" constant="48" id="MOC-pQ-w9V"/>
                             <constraint firstItem="3Ek-g5-0tD" firstAttribute="trailing" secondItem="Qln-Cr-a4f" secondAttribute="trailing" id="Owi-hH-xh8"/>
+                            <constraint firstItem="Qln-Cr-a4f" firstAttribute="trailing" secondItem="frv-rw-WkX" secondAttribute="trailing" constant="174" id="TPs-XZ-nyN"/>
+                            <constraint firstItem="fhJ-bI-Liq" firstAttribute="leading" secondItem="Qln-Cr-a4f" secondAttribute="leading" constant="37" id="VUh-eI-iDu"/>
                             <constraint firstItem="Qln-Cr-a4f" firstAttribute="bottom" secondItem="yx8-l7-kMc" secondAttribute="bottom" constant="6" id="WFW-n2-alg"/>
+                            <constraint firstItem="Qln-Cr-a4f" firstAttribute="trailing" secondItem="fhJ-bI-Liq" secondAttribute="trailing" constant="312" id="WIn-ZD-eQi"/>
                             <constraint firstItem="3Ek-g5-0tD" firstAttribute="top" secondItem="Qln-Cr-a4f" secondAttribute="top" id="dJ1-IP-FFn"/>
                             <constraint firstItem="yx8-l7-kMc" firstAttribute="top" secondItem="3Ek-g5-0tD" secondAttribute="bottom" constant="8" symbolic="YES" id="dLi-aH-4et"/>
                             <constraint firstItem="3Ek-g5-0tD" firstAttribute="leading" secondItem="Qln-Cr-a4f" secondAttribute="leading" id="k2r-4n-Xew"/>
@@ -214,6 +229,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="swY-XI-uGe"/>
                     <connections>
+                        <outlet property="drop1" destination="fhJ-bI-Liq" id="bn5-Hx-qdd"/>
+                        <outlet property="drop2" destination="XDp-8y-30L" id="532-hV-uEe"/>
+                        <outlet property="drop3" destination="frv-rw-WkX" id="JWr-Jc-CKO"/>
                         <outlet property="lastUpdatedLabel" destination="yx8-l7-kMc" id="fvx-b0-8F8"/>
                         <outlet property="simpleForecast" destination="3Ek-g5-0tD" id="n3L-W6-gsu"/>
                     </connections>
@@ -246,6 +264,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="drop" width="36" height="36"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="sun.max" catalog="system" width="128" height="124"/>
