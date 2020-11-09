@@ -2,8 +2,7 @@
 //  HomeViewController.swift
 //  CleverWeather
 //
-//  Created by Jonas on 11/3/20.
-//
+
 
 import UIKit
 import CoreLocation
@@ -11,6 +10,8 @@ import CoreLocation
 class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleForecastDelegate,ForecastFetcherDelegate {
     
     @IBOutlet weak var simpleForecast : SimpleForecast!
+    @IBOutlet weak var lastUpdatedLabel: UILabel!
+    
     let locationManager = CLLocationManager()
     var forecasts : SimpleForecast2?
     var currentIndex : Int?
@@ -34,7 +35,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count-1]
-        print("Got location1")
         api.getSimpleForecast(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
         locationManager.stopUpdatingLocation()
     }
@@ -96,18 +96,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
         let tomorowIndex = findNext(date: tomorow!)
         
         guard tomorowIndex != nil else {
-            print("Found \(tomorowIndex)")
             return nil;
         }
         print()
         lastDate = tomorow
-        print(tomorowIndex)
         
         return forecasts?.timeseries[tomorowIndex!]
     }
     
     func getPreviousForecast() -> Timeseries? {
-        print("Prev")
+        
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: lastDate!)
         let yersterdayIndex = findNext(date: yesterday!)
         lastDate = yesterday
@@ -119,8 +117,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
     }
     
     func findNext(date: Date) -> Int?{
-        // Får inn datoen som skal sjekkes
-        
         for (index,weather) in forecasts!.timeseries.enumerated() {
             if Calendar.current.compare(date, to: weather.time, toGranularity: .day) == .orderedSame {
                 return index
@@ -128,7 +124,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
         }
         
         return nil
-        
     }
     
     func updateSimpleWeather(forecast: SimpleForecast2) {
@@ -137,6 +132,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate,SimpleFore
         let next = self.findNext(date: date)!
         self.lastDate = forecast.timeseries[next].time;
         setForecast(forecast: forecast)
+        lastUpdatedLabel.text = "Last updated: \(forecast.timeseries[0].time)"
+    }
+    
+    func updateError(error: FetchError) -> Void{
+        switch error.code {
+        case .noData:
+            simpleForecast.updateContent(image: UIImage(named: "noConnection")!, day: "Cant retrieve forcast", umbrella: false)
+        default:
+            print(error.error)
+        }
     }
     
 

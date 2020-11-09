@@ -33,41 +33,12 @@ class WeatherParser {
         
     }
     
-    
-    
-    func formatSimple(_ data: WeatherResponse) -> ParsedSimpleWeather? {
-        guard let todayIndex = data.properties.indexOnDate(Date()) else {
-            return nil
-        }
-    
-        return (timeseries: data.properties.timeseries, todayIndex: todayIndex)
-    }
-    
-    func formatDaily(_ data: WeatherResponse) -> ParsedWeather {
-        let time = Calendar.current.dateComponents([.month,.day,.hour], from: Date())
-        
-        let weather = data.properties.filter(date: Date())
-        
-        var currentWeather = [NextHours]()
-        let noData = NextHours(summary: Summary(symbol_code: "No Data"),details: nil)
-        
-        let hours : [NextHours?] = [weather[0].data.next1hours,weather[0].data.next6hours,weather[0].data.next12hours]
-        for hour in hours {
-            if hour != nil {
-                currentWeather.append(hour!)
-            } else {
-                currentWeather.append(noData)
-            }
-        }
-        
-        return ParsedWeather(hours: currentWeather, instant: weather[0].data.instant.details)
-        
-    }
-    
     func parseDailyForecast(_ json: String) -> DailyForecast {
         
         let apiForecast = parseWeather(data: json).properties
+        
         let forecast = apiForecast.filter(date: Date())[0]
+        
         let noData = NextHours(summary: Summary(symbol_code: "No Data"), details: nil)
 
         let hours : [NextHours] = [forecast.data.next1hours,forecast.data.next6hours,forecast.data.next12hours].map { hour in
@@ -98,7 +69,13 @@ extension Properties {
         let now = Calendar.current.dateComponents([.month,.day,.hour], from: date)
         
         return self.timeseries.filter { weather in
-            return Calendar.current.dateComponents([.month,.day,.hour], from: weather.time) == now
+            
+            if Calendar.current.compare(date, to: weather.time, toGranularity: .month) == .orderedSame {
+                if Calendar.current.compare(date, to: weather.time, toGranularity: .day) == .orderedSame {
+                    return true
+                } else {return false}
+            } else { return false }
+            
         }
     }
     func indexOnDate(_ date: Date) -> Int? {

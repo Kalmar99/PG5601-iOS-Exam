@@ -42,7 +42,7 @@ class StorageManager {
     
     func read() -> String? {
         let fileURL = URL(fileURLWithPath: filename, relativeTo: directoryURL).appendingPathExtension(extention)
-
+        print("Delivered data")
         do {
             let data = try Data(contentsOf: fileURL)
             let parser = WeatherParser()

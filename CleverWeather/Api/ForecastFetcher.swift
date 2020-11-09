@@ -6,6 +6,21 @@
 //
 
 
+enum FetchErrorCodes {
+    case noInternet
+    case storageError
+    case unknownError
+    case noData
+}
+
+struct FetchError {
+    let code: FetchErrorCodes
+    let reason: String
+    let description: String
+    let error : Error
+}
+
+
 struct DailyForecast {
     var instant: Instant
     var hours: [NextHours]
@@ -72,13 +87,15 @@ class ForecastFetcher {
     var test : String?
     
     private func fetch(_ url: String, complete: @escaping (FetchResponse) -> Void ) {
-        let endpoint = URL(string: url)!
-        let task = URLSession.shared.dataTask(with: endpoint, completionHandler: { (data, response, error) in
+        let Url = URL(string: (endpoint + url))!
+        let task = URLSession.shared.dataTask(with: Url, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
+                if error != nil {print(error)}
                 guard data != nil else {
                     complete(.failure(FetchError(code: .noData, reason: "Could not get any data from api", description: "ForecastFetcher.swift", error: NSError())))
                     return;
                 }
+                StorageManager().save(json: String(data: data!, encoding: .utf8)!)
                 complete(.success(data!))
             }
         })
@@ -86,23 +103,31 @@ class ForecastFetcher {
     }
     
     private func getData(lat: Double, lon: Double, complete: @escaping (FetchResponse) -> Void) {
-        let url = "?lat=\(String(format: "%.2f", lat))&lon=\(String(format: "%.2f",lon))"
-        let storage = StorageManager()
-        if storage.isData() {
-            let dataString = storage.read()
-            
-            guard dataString != nil else {
-                let error = FetchError(code: .storageError, reason: "file exists but contain no data", description: "ForecastFetcher.swift : getData", error: NSError())
-                complete(.failure(error))
-                return;
-            }
-            
-            storage.save(json: dataString!)
         
-            complete(.success(dataString!.data(using: .utf8)!))
-        } else {
-            fetch(url, complete: complete)
+        let url = "?lat=\(String(format: "%.2f", lat))&lon=\(String(format: "%.2f",lon))"
+        
+        // Try to get data from api first. if that fails, get from disk
+        fetch(url) { (response) in
+            switch response {
+                case .success(let data):
+                    complete(.success(data))
+                case .failure(let error):
+                    let storage = StorageManager()
+                    if storage.isData() {
+                        print("From disk")
+                        let dataString = storage.read()
+                        
+                        guard dataString != nil else {
+                            let error = FetchError(code: .storageError, reason: "file exists but contain no data", description: "ForecastFetcher.swift : getData", error: NSError())
+                            complete(.failure(error))
+                            return;
+                        }
+                            
+                        complete(.success(dataString!.data(using: .utf8)!))
+                    }
+            }
         }
+        
     }
 
     func getSimpleForecast(lat: Double, lon: Double) {

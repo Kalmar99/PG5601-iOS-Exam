@@ -74,7 +74,12 @@ class ForecastViewController: UIViewController,UITabBarControllerDelegate,locati
     }
     
     func updateError(error: FetchError) -> Void{
-        print(error)
+        switch error.code {
+        case .noData:
+            self.errorLabel.text = "No Connection, connect to internet"
+        default:
+            print(error.error)
+        }
     }
     
     func updateDescriptions(descriptions: [String : AnyObject]) {

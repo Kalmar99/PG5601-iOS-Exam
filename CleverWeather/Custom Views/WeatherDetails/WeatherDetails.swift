@@ -59,8 +59,19 @@ class WeatherDetails: UIView,WeatherDetailsDelegate, ForecastFetcherDelegate {
         guard cords?.lat != nil && cords?.lon != nil else {
             return
         }
+        
+        var data = forecast.hours[0];
+        
+        if data.summary.symbol_code == "No Data" {
+            if forecast.hours[1].summary.symbol_code !=  "No Data" {
+                data = forecast.hours[1]
+            } else if forecast.hours[2].summary.symbol_code != "No Data" {
+                data = forecast.hours[2]
+            }
+        }
     
         self.updateData(lat: cords!.lat! , lon: cords!.lon! , data: forecast.hours[0])
+        
     }
     
     
